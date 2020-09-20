@@ -1,0 +1,169 @@
+﻿@model DjTaba.Utility.PaginatedList<DjTaba.Models.Genre>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1 style="float:right">
+        GenrsManagers
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Genres</li>
+    </ol>
+</section>
+<p>
+    <a class="btn btn-success openmodal" href="#" style="margin-right: 10px;margin-top: 30px;" data-toggle="modal" data-target="#myModal"> Add New</a>
+</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-center" style="border-style: solid;border-color:dimgray">
+            <h2 style="font-size:medium">Search</h2>
+        </div>
+        @using (Html.BeginForm("Index",
+          "Genres",
+          FormMethod.Post))
+        {
+
+            <div class="box zmdi-border-color" style="height:auto">
+                <div class="box-body table-responsive no-padding row ">
+                    <div style="width:90%;margin-right:30px;margin-top:20px;">
+                        <div class="row" style="margin-left:20px;">
+                            <label for="exampleInputEmail1">Search By Name:</label>
+                            <input name="searchString" placeholder="Insert Name" class="" style="width:260px">
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:20px">
+                    <button style="margin-right:20px;" type="submit" class="btn btn-primary">Search Or Reload</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover text-center">
+                    <tr>
+                        <th>
+                            Row
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                    @{ int rowNo = 0; }
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @(rowNo += 1)
+                            </td>
+                            <td>
+                                @item.Name
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#QuestionModal" onclick="AssignButtonClicked(this)" data-assigned-id="@item.Id"> Remove</button> |
+                                <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#EditModal" id="@item.Id"> Edit</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal" role="dialog" style="height:auto;overflow-y:visible">
+    <div class="modal-dialog modal-sm" style="width:400px">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Register New Genre</h4>
+            </div>
+            <div class="modal-body" style="height:auto">
+
+                <form id="register">
+                    <input id="GenreId" name="GenreId" hidden />
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> Name :</label>
+                        <input display="Name" id="Name" name="Name" placeholder="Please Enter Name" class="form-control" style="width:70%" required>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="Save();">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Error">
+
+</div>
+<div id="Success">
+
+</div>
+<div id="Question">
+
+</div>
+<script>
+	window.onload = Load;
+        function Load() {
+		CreateAllModals();
+        	$(".openmodal").click(function () {
+				clear('register',["input"]);
+			});
+		$(".btn-warning").click(function () {
+			EditAjax("../Genres/GenreInfo", this.id);
+                var bodyStyle = document.body.style;
+                bodyStyle.removeProperty('padding-right');
+		});
+	}	
+        function Save() {
+        if (checkvalidity('register') === 0) {
+            return;
+        }
+        else {
+            $("#myModal").modal('toggle');
+            var Parameters = [{ id: "Name", htmlname: "Name", special: "" },{ id: "GenreId", htmlname: "GenreId", special: "" }];
+            PostAjax('../Genres/Register', Parameters, "../Genres/Index");
+        }
+	}
+    function AssignButtonClicked(elem) {	
+	   $('#GenreId').val($(elem).data('assigned-id'));
+	}
+   function Remove() {
+   var Parameters = [{ id: "GenreId", htmlname: "GenreId", special: "" }];
+    PostAjax('../Genres/Remove', Parameters,"../Genres/Index");
+	}
+
+
+</script>

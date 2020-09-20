@@ -1,0 +1,503 @@
+﻿@model DjTaba.Utility.PaginatedList<DjTaba.Models.Music>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1 style="float:right">
+        MusicsManager
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Musics</li>
+    </ol>
+</section>
+<p>
+    <a class="btn btn-success openmodal" href="#" style="margin-right: 10px;margin-top: 30px;" data-toggle="modal" data-target="#myModal"> Add New</a>
+</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-center" style="border-style: solid;border-color:dimgray">
+            <h2 style="font-size:medium">Search</h2>
+        </div>
+        @using (Html.BeginForm("Index",
+              "Artists",
+              FormMethod.Post))
+        {
+
+            <div class="box zmdi-border-color" style="height:auto">
+                <div class="box-body table-responsive no-padding row ">
+                    <div style="width:90%;margin-right:30px;margin-top:20px;">
+                        <div class="row" style="margin-left:20px;">
+                            <label for="exampleInputEmail1">Search By FullName:</label>
+                            <input name="searchString" placeholder="Insert FullName" class="" style="width:260px">
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:20px">
+                    <button style="margin-right:20px;" type="submit" class="btn btn-primary">Search Or Reload</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover text-center">
+                    <tr>
+                        <th>
+                            Row
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Artists
+                        </th>
+                        <th>
+                            Genre
+                        </th>
+                        <th>
+                            Lyric
+                        </th>
+                        <th>
+                            Arrangement
+                        </th>
+                        <th>
+                            CoverArt
+                        </th>
+                        <th>
+                            PhotoCreator
+                        </th>
+                        <th>
+                            ShortDescription
+                        </th>
+                        <th>
+                            Link
+                        </th>
+                        <th>
+                            Speed
+                        </th>
+                        <th>
+                            MusicKeys
+                        </th>
+                        <th>
+                            Release Date
+                        </th>
+                        <th>
+                            Mix Date
+                        </th>
+                        <th>
+                            Size
+                        </th>
+                        <th>
+                            Quality
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                    @{ int rowNo = 0; }
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>
+                        @(rowNo += 1)
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @{
+                            if (item.ArtistToMusics.Count != 0)
+                            {
+
+                                foreach (var Artistlist in item.ArtistToMusics)
+
+                                {
+                                    <p style="margin:2px">
+
+                                    @Artistlist.Name 
+                                        
+                                    </p>
+                                }
+                            }
+                            else
+                            {
+                                <p class="text text-danger">
+                                    No Artist !
+
+                                </p>
+                            }
+
+                        } 
+                    </td>
+
+
+                    <td>
+                        @item.Genre.Name
+                    </td>
+                    @{
+
+                        if (String.IsNullOrEmpty(item.Lyric))
+                        {
+                            <td class="text text-danger">
+                                No Lyric !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Lyric
+                            </td>
+                        }
+                        if (String.IsNullOrEmpty(item.Arrangement))
+                        {
+                            <td class="text text-danger">
+                                No Arrangement !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Arrangement
+                            </td>
+                        }
+                        if (String.IsNullOrEmpty(item.CoverArt))
+                        {
+                            <td class="text text-danger">
+                                No CoverArt !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.CoverArt
+                            </td>
+                        }
+                        if (String.IsNullOrEmpty(item.PhotoCreator))
+                        {
+                            <td class="text text-danger">
+                                No PhotoCreator !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.PhotoCreator
+                            </td>
+                        }
+                        if (String.IsNullOrEmpty(item.ShortDescription))
+                        {
+                            <td class="text text-danger">
+                                No ShortDescription !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.ShortDescription
+                            </td>
+                        }
+                        if (String.IsNullOrEmpty(item.Link))
+                        {
+                            <td class="text text-danger">
+                                No Link !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Link
+                            </td>
+                        }
+                        if (String.IsNullOrEmpty(item.Speed))
+                        {
+                            <td class="text text-danger">
+                                No Speed !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Speed
+                            </td>
+                        }
+                        if (String.IsNullOrEmpty(item.MusicKeys))
+                        {
+                            <td class="text text-danger">
+                                No MusicKeys !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.MusicKeys
+                            </td>
+                        }
+                        if (item.RelaseDate == DateTime.MinValue)
+                        {
+                            <td class="text text-danger">
+                                No RelaseDate !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.RelaseDate
+                            </td>
+                        }
+                        if (item.MixDate == DateTime.MinValue)
+                        {
+                            <td class="text text-danger">
+                                No MixDate !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.MixDate
+                            </td>
+                        }
+                        if (item.Size == 0)
+                        {
+                            <td class="text text-danger">
+                                No Size !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Size mb
+                            </td>
+                        }
+                        if (item.Quality == 0)
+                        {
+                            <td class="text text-danger">
+                                No Quality !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Quality
+                            </td>
+                        }
+
+                    }
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#QuestionModal" onclick="AssignButtonClicked(this)" data-assigned-id="@item.Id"> Remove</button> |
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#EditModal" id="@item.Id"> Edit</button>
+                    </td>
+                </tr>
+                    }
+                </table>
+            </div>
+        </div>
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+    </div>
+</div>
+<div class="modal fade" id="myModal" role="dialog" style="height:auto;overflow-y:visible">
+    <div class="modal-dialog modal-sm" style="width:400px">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Register New Music</h4>
+            </div>
+            <div class="modal-body" style="height:auto">
+                <form id="register">
+                    <input id="MusicId" name="MusicId" hidden />
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> For Multipate Select Artists , hold Ctrl :</label>
+                        <select  class="form-control" style="height:50px;width:43%" name="ArtistsId" id="ArtistsId" multiple="multiple">
+                           
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> SelectGenre :</label>
+                        <select class="form-control" style="width:160px" name="GenreId" id="GenreId" >
+                         <option value="0">Select Please</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="margin-right:5px;">
+                        <label for="exampleInputEmail1"> Name :</label>
+                        <input display="Name" id="Name" name="Name" placeholder="Please Enter Music Name" class="form-control" style="width:70%" required>
+                    </div>
+
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> Arrangement :</label>
+                        <input display="Arrangement" id="Arrangement" name="Arrangement" placeholder="Please Enter  Arrangement" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> CoverArt :</label>
+                        <input display="CoverArt" id="CoverArt" name="CoverArt" placeholder="Please Enter  CoverArt" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> PhotoCreator :</label>
+                        <input display="PhotoCreator" id="PhotoCreator" name="PhotoCreator" placeholder="Please Enter  PhotoCreator" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> ShortDescription :</label>
+                        <input display="ShortDescription" id="ShortDescription" name="ShortDescription" placeholder="Please Enter  ShortDescription" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> Link :</label>
+                        <input  display="Link" id="Link" name="Link" placeholder="Please Enter  Link" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> Speed :</label>
+                        <input type="url" display="Speed" id="Speed" name="Speed" placeholder="Please Enter  Speed" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> MusicKeys :</label>
+                        <input display="MusicKeys" id="MusicKeys" name="MusicKeys" placeholder="Please Enter  MusicKeys" class="form-control" style="width:70%">
+                    </div>
+
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> RelaseDate :</label>
+                        <input type="date" display="RelaseDate" id="RelaseDate" name="RelaseDate" placeholder="Please Enter  RelaseDate" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> MixDate :</label>
+                        <input type="date"  display="MixDate" id="MixDate" name="MixDate" placeholder="Please Enter  MixDate" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> Size :</label>
+                        <input display="Size" id="Size" name="Size" placeholder="Please Enter  Size" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> Quality :</label>
+                        <input display="Quality" id="Quality" name="Quality" placeholder="Please Enter  Quality" class="form-control" style="width:70%">
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> AbutMusic :</label>
+                        <textarea display="AbutMusic" id="AbutMusic" name="AbutMusic" placeholder="Please Enter AbutMusic" class="form-control" style="max-width:70%"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> SongText :</label>
+                        <textarea display="SongText" id="SongText" name="SongText" placeholder="Please Enter SongText" class="form-control" style="max-width:70%"></textarea>
+                    </div>
+                    <div class="form-group" style="margin-right:5px">
+                        <label for="exampleInputEmail1"> Lyric :</label>
+                        <textarea display="Lyric" id="Lyric" name="Lyric" placeholder="Please Enter Lyric" class="form-control" style="max-width:70%"></textarea>
+                    </div>
+                    <div class="form-group " style="margin-right:5px">
+                        <label for="exampleInputEmail1"> SelecMusicFile :</label>
+                        <div id="main-container">
+                            <input display="Music" id="MusicUrl" name="MusicUrl" class="TheFile" onchange="SetPictures('MusicUrl','MusicItem','music');" style="display:none" type="file" accept="audio/*" required>
+                            <button type="button" style="height:20%;margin-left:15px;top:0;" class="btn btn-primary" onclick="MusicUrl.click()"><i class="fa fa-music"></i> Choose Music  </button>
+                            <div id="MusicItem" style="width:400px;height:auto;margin-left:5px;">               
+                            </div>
+                            <div id="RemoveMusicItem" style="width:auto;height:auto;margin-left:5px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group " style="margin-right:5px">
+                        <label for="exampleInputEmail1"> SelecMediaFilesAbutThisMusic :</label>
+                        <div id="main-container">
+                            <input display="MusicFiles" id="MusicFiles" name="MusicFiles" class="MusicUrl" onchange="SetPictures('MusicFiles','MusicFilesItems');" style="display:none" multiple type="file">
+                            <button type="button" style="height:20%;margin-left:15px;top:0;" class="btn btn-primary" onclick="MusicFiles.click()"><i class="fa fa-file-audio-o"></i> Choose   </button>
+                            <div id="MusicFilesItems" style="width:400px;height:auto;margin-left:5px;">
+
+                            </div>
+                            <div id="RemoveMusicFilesItems" style="width:auto;height:auto;margin-left:5px;">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success" onclick="Save();">Save</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="Error">
+</div>
+<div id="Success">
+</div>
+<div id="Question">
+</div>
+<script>
+    window.onload = Load;
+	function Load() {
+		CreateAllModals();
+        FillComboBox('../Musics/LoadArtists', 'ArtistsId');
+        FillComboBox('../Musics/LoadGenres', 'GenreId');
+ 
+        $(".openmodal").click(function () {
+            clear('register', ["input", "textarea"]);
+            cleardiv(["RemoveMusicFilesItems", "MusicFilesItems", "MusicItem", "RemoveMusicItem"]);
+        });
+        $(".btn-warning").click(function () {
+            EditAjax("../Musics/MusicInfo", this.id, "RemoveMusicItem");
+            var bodyStyle = document.body.style;
+            bodyStyle.removeProperty('padding-right');
+		});
+		SetInputFilter(["Speed", "Size", "Quality"]);
+    }
+    function Save() {
+        if (checkvalidity('register') === 0) {
+            return;
+        }
+        else {
+            $("#myModal").modal('toggle');
+            var Parameters = [{ id: "Name", htmlname: "Name", special: "" },
+            { id: "GenreId", htmlname: "GenreId", special: "combo" },
+            { id: "ArtistsId", htmlname: "ArtistsId", special: "Multicombo" },
+            { id: "Lyric", htmlname: "Lyric", special: "" },
+            { id: "Arrangement", htmlname: "Arrangement", special: "" },
+            { id: "CoverArt", htmlname: "CoverArt", special: "" },
+            { id: "PhotoCreator", htmlname: "PhotoCreator", special: "" },
+            { id: "ShortDescription", htmlname: "ShortDescription", special: "" },
+            { id: "Link", htmlname: "Link", special: "" },
+            { id: "Speed", htmlname: "Speed", special: "" },
+            { id: "MusicKeys", htmlname: "MusicKeys", special: "" },
+            { id: "AbutMusic", htmlname: "AbutMusic", special: "" },
+            { id: "SongText", htmlname: "SongText", special: "" },
+            { id: "MusicUrl", htmlname: "MusicUrl", special: "music" },
+            { id: "RelaseDate", htmlname: "RelaseDate", special: "" },
+            { id: "MixDate", htmlname: "MixDate", special: "" },
+            { id: "Size", htmlname: "Size", special: "" },
+			{ id: "Quality", htmlname: "Quality", special: "" },
+            { id: "MusicFiles", htmlname: "MusicFiles", special: "file" }
+			];
+			PostAjax('../Musics/Register', Parameters, "../Musics/Index");
+
+
+            
+        }
+    }
+    function AssignButtonClicked(elem) {
+        $('#MusicId').val($(elem).data('assigned-id'));
+    }
+    function Remove() {
+        var Parameters = [{ id: "MusicId", htmlname: "MusicId", special: "" }];
+        PostAjax('../Musics/Remove', Parameters, "../Musics/Index");
+    }
+</script>
