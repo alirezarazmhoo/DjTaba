@@ -18,7 +18,6 @@ function checkvalidity(target) {
         }
         else {
             ErrorText += 'Is Empty !';
-
         }
         $("#textError").text(ErrorText);
         $("#ErrorModal").modal('show');
@@ -58,19 +57,32 @@ function CreateModal(target, mode) {
         document.getElementById(target).innerHTML = modal;
     }
 }
-function PostAjax(ActionName, Parameters,redirecturl) {
+function PostAjax(ActionName, Parameters, redirecturl) {
     var fd = new FormData();
     for (var i = 0; i < Parameters.length; i++) { 
         if (Parameters[i].special === 'combo') {
             fd.append(Parameters[i].id, $('#' + Parameters[i].htmlname + '').find('option:selected').val());
         }
+        else if (Parameters[i].special === 'Multicombo') {
+            fd.append(Parameters[i].id, $('#' + Parameters[i].htmlname + '').val());
+        }
         else if (Parameters[i].special === 'radio') {
             fd.append(Parameters[i].id, $('input[name="' + Parameters[i].htmlname + '"]:checked').val());
         }
         else if (Parameters[i].special === 'file') {
-            $.each($(".TheFiles"), function (i, obj) {
+           
+            $.each($(".TheFile"), function (i, obj) {
                 $.each(obj.files, function (j, file) {
-                    fd.append('Image', file);
+                    fd.append("file", file);
+                });
+            });
+            
+        }
+        else if (Parameters[i].special === 'music') {
+
+            $.each($(".MusicUrl"), function (i, obj) {
+                $.each(obj.files, function (j, file) {
+                    fd.append("musicfiles", file);
                 });
             });
 
@@ -81,7 +93,6 @@ function PostAjax(ActionName, Parameters,redirecturl) {
     }
     $.ajax({
         type: "POST",
-        //url: "@Url.Action('"+ ActionName+"')",
         url: ""+ ActionName+"",
         data: fd,
         dataType: "json",
@@ -115,18 +126,19 @@ function CreateAllModals() {
     CreateModal('Success', 2);
     CreateModal('Question', 3);
 }
+
 function FillComboBox(ActionName,Target) {
     $.ajax({
-        type: "Get",
+        type: "GET",
         url: "" + ActionName + "",
         dataType: "json",
         contentType: false,
         processData: false,
-
         success: function (response) {
-            if (response.success) {                  
+            if (response.success) {
                 $.each(response.list, function () {
-               $('#' + Target + '').append($("<option/>").val(this.Id).text(this.Name));
+                  
+               $('#' + Target + '').append($("<option/>").val(this.id).text(this.name));
                 });
             }
             else {
@@ -135,11 +147,13 @@ function FillComboBox(ActionName,Target) {
             }
         },
         error: function (response) {
-            $("#LoadingModal").modal('show');
+            alert("Error");
+            //$("#LoadingModal").modal('show');
         }
     });
 }
-function EditAjax(ActionName, id, TargetFiles) {
+
+function EditAjax(ActionName, id) {
  
     var fd = new FormData();
     fd.append('ItemId', id);
@@ -155,16 +169,17 @@ function EditAjax(ActionName, id, TargetFiles) {
         },
         success: function (response) {
             if (response.success) {
-                $.each(response.listItem, function () {   
+                $.each(response.listItem, function () {  
+                   
                     $('#' + this.key + '').val(this.value);
                 });
-                if (response.files != null && TargetFiles != null) {
+                if (response.artistfiles != null) {
                     var Filescontent = "";
-                    $.each(response.files, function () {
-
-                        Filescontent += '<div id= "' + this.id + '"><img src="data: image; base64, ' + this.url + '" style="width: 70px; height: 60px;id="' + this.id + '" " /><button type="button"  class="btn btn-danger btn-sm btnremovefile"   style="width:30px;margin-left:30%;"><i class="fa fa-remove"></i></button></div>';
+             
+                    $.each(response.artistfiles, function () {
+                       Filescontent += '<div id= "' + this.id + '"><img src="data: image; base64, ' + this.url + '" style="width: 70px; height: 60px;id="' + this.id + '" " /><button type="button"  class="btn btn-danger btn-sm btnremovefile"   style="width:30px;margin-left:30%;"><i class="fa fa-remove"></i></button></div>';
                     });
-                    $('#' + TargetFiles+'').html(Filescontent);
+                    $('#RemoveImageItems').html(Filescontent);
                 }  
                 $('#myModal').modal('show');
             }
@@ -175,11 +190,8 @@ function EditAjax(ActionName, id, TargetFiles) {
         },
         error: function (response) {
             $("#LoadingModal").modal('show');
-
         },
-        complete: function () {
-           
-
+        complete: function () {          
             $("#LoadingModal").modal('toggle');
         }
     });
@@ -219,13 +231,20 @@ function ResetListBox(targets) {
 }
 
 
-function SetPictures(inputtarget , target) {
+function SetPictures(inputtarget , target , type) {
     var myURL = window.URL || window.webkitURL;
     var result = "";
+    var tag = "";
     var _File = document.getElementById("" + inputtarget+"").files;
     for (var i = 0; i < _File.length; i++) {
         var fileURL = myURL.createObjectURL(_File[i]);
-        var tag = "<img src='" + fileURL + "' style='width:80px;height:60px;'>";
+
+        if (type == 'music') {
+            tag = "<img src='../Images/MusicIcon.png' style='width:80px;height:60px;'>";
+        }
+        else {
+            tag = "<img src='" + fileURL + "' style='width:80px;height:60px;'>";
+        }
         result += tag;
     }
 
