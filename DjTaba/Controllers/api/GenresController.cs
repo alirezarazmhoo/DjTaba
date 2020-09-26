@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DjTaba.Infrastructure;
+using DjTaba.Models.ApiModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -29,6 +30,26 @@ namespace DjTaba.Controllers.api
                 return BadRequest(ex.Message);
             }
 
+        }
+
+        [Route("GetByid")]
+        [HttpGet]
+        public async Task<ActionResult> GetByid(int Id)
+        {
+            try
+            {
+                var item = await _unitofwork.IGenreRepo.GetGenreByIdAsync(Id); 
+                if(item is null)
+                {
+                    return BadRequest($"The Id By {Id} Is Not Found !");
+
+                }
+                return Ok(item);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }

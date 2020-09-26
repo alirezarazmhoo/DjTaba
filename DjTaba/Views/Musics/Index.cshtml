@@ -15,7 +15,7 @@
     </ol>
 </section>
 <p>
-    <a class="btn btn-success openmodal" href="#" style="margin-right: 10px;margin-top: 30px;" data-toggle="modal" data-target="#myModal"> Add New</a>
+    <a id="addnew" class="btn btn-success openmodal" href="#" style="margin-right: 10px;margin-top: 30px;" data-toggle="modal" data-target="#myModal"> Add New</a>
 </p>
 <div class="row">
     <div class="col-sm-12">
@@ -292,7 +292,7 @@
                     }
                     <td>
                         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#QuestionModal" onclick="AssignButtonClicked(this)" data-assigned-id="@item.Id"> Remove</button> |
-                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#EditModal" id="@item.Id"> Edit</button>
+                        <button type="button" class="btn btn-warning " data-toggle="modal" data-target="#EditModal" id="@item.Id"> Edit</button>
                     </td>
                 </tr>
                     }
@@ -324,18 +324,19 @@
                 <h4 class="modal-title">Register New Music</h4>
             </div>
             <div class="modal-body" style="height:auto">
+              
+
                 <form id="register">
                     <input id="MusicId" name="MusicId" hidden />
                     <div class="form-group" style="margin-right:5px">
                         <label for="exampleInputEmail1"> For Multipate Select Artists , hold Ctrl :</label>
-                        <select  class="form-control" style="height:50px;width:43%" name="ArtistsId" id="ArtistsId" multiple="multiple">
-                           
+                        <select class="form-control" style="height:50px;width:43%" name="ArtistsId" id="ArtistsId" multiple="multiple">
                         </select>
                     </div>
                     <div class="form-group" style="margin-right:5px">
                         <label for="exampleInputEmail1"> SelectGenre :</label>
-                        <select class="form-control" style="width:160px" name="GenreId" id="GenreId" >
-                         <option value="0">Select Please</option>
+                        <select class="form-control" style="width:160px" name="GenreId" id="GenreId">
+                            <option value="0">Select Please</option>
                         </select>
                     </div>
                     <div class="form-group" style="margin-right:5px;">
@@ -361,7 +362,7 @@
                     </div>
                     <div class="form-group" style="margin-right:5px">
                         <label for="exampleInputEmail1"> Link :</label>
-                        <input  display="Link" id="Link" name="Link" placeholder="Please Enter  Link" class="form-control" style="width:70%">
+                        <input display="Link" id="Link" name="Link" placeholder="Please Enter  Link" class="form-control" style="width:70%">
                     </div>
                     <div class="form-group" style="margin-right:5px">
                         <label for="exampleInputEmail1"> Speed :</label>
@@ -369,7 +370,7 @@
                     </div>
                     <div class="form-group" style="margin-right:5px">
                         <label for="exampleInputEmail1"> MusicKeys :</label>
-                        <input display="MusicKeys" id="MusicKeys" name="MusicKeys" placeholder="Please Enter  MusicKeys" class="form-control" style="width:70%">
+                        <input display="MusicKeys" id="MusicKeys" name="MusicKeys" placeholder="Example:#Rock,#HardRock" class="form-control" style="width:70%">
                     </div>
 
                     <div class="form-group" style="margin-right:5px">
@@ -378,7 +379,7 @@
                     </div>
                     <div class="form-group" style="margin-right:5px">
                         <label for="exampleInputEmail1"> MixDate :</label>
-                        <input type="date"  display="MixDate" id="MixDate" name="MixDate" placeholder="Please Enter  MixDate" class="form-control" style="width:70%">
+                        <input type="date" display="MixDate" id="MixDate" name="MixDate" placeholder="Please Enter  MixDate" class="form-control" style="width:70%">
                     </div>
                     <div class="form-group" style="margin-right:5px">
                         <label for="exampleInputEmail1"> Size :</label>
@@ -405,10 +406,9 @@
                         <div id="main-container">
                             <input display="Music" id="MusicUrl" name="MusicUrl" class="TheFile" onchange="SetPictures('MusicUrl','MusicItem','music');" style="display:none" type="file" accept="audio/*" required>
                             <button type="button" style="height:20%;margin-left:15px;top:0;" class="btn btn-primary" onclick="MusicUrl.click()"><i class="fa fa-music"></i> Choose Music  </button>
-                            <div id="MusicItem" style="width:400px;height:auto;margin-left:5px;">               
+                            <div id="MusicItem" style="width:400px;height:auto;margin-left:5px;margin-top:5px">
                             </div>
-                            <div id="RemoveMusicItem" style="width:auto;height:auto;margin-left:5px;">
-                            </div>
+                         
                         </div>
                     </div>
                     <div class="form-group " style="margin-right:5px">
@@ -499,5 +499,8 @@
     function Remove() {
         var Parameters = [{ id: "MusicId", htmlname: "MusicId", special: "" }];
         PostAjax('../Musics/Remove', Parameters, "../Musics/Index");
-    }
+	}
+
+
+
 </script>

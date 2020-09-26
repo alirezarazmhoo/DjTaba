@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
+
 namespace DjTaba.Controllers
 {
     public class ArtistsController : Controller
@@ -87,6 +88,19 @@ namespace DjTaba.Controllers
                     return Json(new { success = false, responseText = "Requset Faild !" });
 
                 }
+
+              if (Artist.ArtistImages != null)
+                {
+                 foreach (var item in Artist.ArtistImages)
+                    {
+                   if (!string.IsNullOrEmpty(item.ImageUrl))
+                   {
+                    var fileInfo = new System.IO.FileInfo($"wwwroot/Upload/ImageArtist/{item.ImageUrl}");
+                  fileInfo.Delete();
+                    }
+                      }
+               }
+        
                 _unitofwork.IArtistRepo.DeleteArtist(Artist);
                 await _unitofwork.SaveAsync();
                 return Json(new { success = true, responseText = "Operation Completed !" });
@@ -122,12 +136,12 @@ namespace DjTaba.Controllers
                     foreach (var item in artistImages)
                     {
                         artistPictureViewModels.Add(new ArtistPictureViewModels()
-                        { id = item.Id, url = Convert.ToBase64String(item.Image)});
+                        { id = item.Id, url =item.ImageUrl});
                     }
                 }
                 return Json(new { success = true, listItem = edit.ToList() , artistfiles = artistPictureViewModels.ToList() });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
            
                 return Json(new { success = false, responseText = "Requset Faild !" });

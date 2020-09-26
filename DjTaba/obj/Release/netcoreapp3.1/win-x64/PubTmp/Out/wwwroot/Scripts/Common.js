@@ -169,15 +169,24 @@ function EditAjax(ActionName, id) {
         },
         success: function (response) {
             if (response.success) {
-                $.each(response.listItem, function () {  
-                   
+                $.each(response.listItem, function () {                  
                     $('#' + this.key + '').val(this.value);
                 });
+                if (response.listartists != null) {                        
+                    $.each(response.listartists, function () {
+                        $("#ArtistsId option[value=" + this.key + "]").attr("selected", true);
+                    });        
+                }
+                if (response.genreitem != null) {
+                    $.each(response.genreitem, function () {
+                        $("#GenreId option[value=" + this.key + "]").attr("selected", true);
+                    });         
+                }
                 if (response.artistfiles != null) {
                     var Filescontent = "";
              
                     $.each(response.artistfiles, function () {
-                       Filescontent += '<div id= "' + this.id + '"><img src="data: image; base64, ' + this.url + '" style="width: 70px; height: 60px;id="' + this.id + '" " /><button type="button"  class="btn btn-danger btn-sm btnremovefile"   style="width:30px;margin-left:30%;"><i class="fa fa-remove"></i></button></div>';
+                        Filescontent += '<div id= "' + this.id + '"><img src="../Upload/ImageArtist/' + this.url + '" style="width: 70px; height: 60px;id="' + this.id + '" " /><button type="button"  class="btn btn-danger btn-sm btnremovefile"   style="width:30px;margin-left:30%;"><i class="fa fa-remove"></i></button></div>';
                     });
                     $('#RemoveImageItems').html(Filescontent);
                 }  

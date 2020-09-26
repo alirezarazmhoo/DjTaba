@@ -426,3 +426,5 @@ C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\System.Web
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\Newtonsoft.Json.Bson.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\Razor\Views\Genres\Index.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\Razor\Views\Musics\Index.cshtml.g.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll

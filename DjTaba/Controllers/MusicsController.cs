@@ -101,6 +101,8 @@ namespace DjTaba.Controllers
                 }
                 List<MusicFilesViewModels> musicFiles = new List<MusicFilesViewModels>();
                 List<EditViewModels> edit = new List<EditViewModels>();
+                List<EditViewModels> listartist = new List<EditViewModels>();
+                List<EditViewModels> genreid = new List<EditViewModels>();
                 edit.Add(new EditViewModels() { key = "MusicId", value = Music.Id.ToString() });
                 edit.Add(new EditViewModels() { key = "Name", value = Music.Name });
                 edit.Add(new EditViewModels() { key = "Lyric", value = Music.Lyric});
@@ -134,8 +136,15 @@ namespace DjTaba.Controllers
                           });
                     }
                 }
+                foreach (var item in Music.ArtistToMusics)
+                {
+                    listartist.Add(new EditViewModels() { key = item.ArtistId.ToString(), value = item.Name });
+                }
+                genreid.Add(new EditViewModels() { key = Music.GenreId.ToString(), value = "" });
+
+
               musicFiles.Add(new MusicFilesViewModels() { id = 0, FileType = null, url =Music.MusicUrl, target = "MusicAudioFile" });
-              return Json(new { success = true, listItem = edit.ToList(), files = musicFiles });
+                return Json(new { success = true, listItem = edit.ToList(), musicattachedfiles = musicFiles , listartists = listartist ,genreitem = genreid , audio = Music.MusicUrl }); ;
             }
             catch (Exception ex)
             {

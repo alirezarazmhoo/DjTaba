@@ -8,7 +8,7 @@ namespace DjTaba.Models
 	public class ArtistImages
 	{
         public int Id { get; set; }
-        public byte[] Image { get; set; }
+        public string ImageUrl { get; set; }
         public int ArtistId { get; set; }
         public Artist Artist { get; set; }
     }

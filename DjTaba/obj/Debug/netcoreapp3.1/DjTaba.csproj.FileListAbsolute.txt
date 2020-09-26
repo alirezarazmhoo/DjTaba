@@ -423,6 +423,8 @@ C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Views\
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\System.Net.Http.Formatting.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\System.Web.Http.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Views\Musics\Index.cshtml.g.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\DjTaba.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\DjTaba.MvcApplicationPartsAssemblyInfo.cache
-C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Views\Musics\Index.cshtml.g.cs

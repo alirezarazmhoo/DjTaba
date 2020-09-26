@@ -47,11 +47,12 @@ namespace DjTaba.Services
 
                 foreach (var item in file)
                 {
-                    using (var stream = new MemoryStream())
+                    var fileName = Path.GetFileName(item.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\Upload\ImageArtist", fileName);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-
                         item.CopyTo(stream);
-                        _DbContext.ArtistImages.Add(new ArtistImages() { Image = stream.ToArray(), ArtistId = artist.Id });
+                        _DbContext.ArtistImages.Add(new ArtistImages() { ImageUrl = fileName, ArtistId = artist.Id });
                     }
                 }
             }
@@ -61,14 +62,14 @@ namespace DjTaba.Services
                 Update(artist);
                 if (file != null && file.Count() > 0)
                 {
-
                     foreach (var item in file)
                     {
-                        using (var stream = new MemoryStream())
+                        var fileName = Path.GetFileName(item.FileName);
+                        var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\Upload\ImageArtist", fileName);
+                        using (var stream = new FileStream(filePath, FileMode.Create))
                         {
-
                             item.CopyTo(stream);
-                            _DbContext.ArtistImages.Add(new ArtistImages() { Image = stream.ToArray(), ArtistId = artist.Id });
+                            _DbContext.ArtistImages.Add(new ArtistImages() { ImageUrl = fileName, ArtistId = artist.Id });
                         }
                     }
                 }
@@ -76,6 +77,7 @@ namespace DjTaba.Services
         }
         public void DeleteArtist(Artist owner)
         {
+         
             Delete(owner);
         }
         public async Task<IEnumerable<ArtistImages>> GetArtistPicture(int artistId)
@@ -90,7 +92,12 @@ namespace DjTaba.Services
         }
         public  void DeleteArtistPicture(ArtistImages file)
         {
+            if (!string.IsNullOrEmpty(file.ImageUrl))
+            {
+                File.Delete($"wwwroot/Upload/ImageArtist/{file.ImageUrl}");
+            }
             _DbContext.ArtistImages.Remove(file);
         }
+  
     }
 }

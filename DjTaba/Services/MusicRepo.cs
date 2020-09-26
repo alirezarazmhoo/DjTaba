@@ -27,8 +27,8 @@ namespace DjTaba.Services
 		}
 		public async Task<Music> GetMusicByIdAsync(int musicId)
 		{
-			return await FindByCondition(s => s.Id.Equals(musicId)).Include(s => s.MusicFiles)
-				.FirstOrDefaultAsync();
+			return await FindByCondition(s => s.Id.Equals(musicId)).Include(s => s.MusicFiles).Include(s => s.ArtistToMusics)
+                .FirstOrDefaultAsync();
 		}
 		public async Task<IEnumerable<Music>> GetMusicWithDetailsAsync(string txtsearch)
 		{
@@ -149,7 +149,7 @@ namespace DjTaba.Services
         {
             if (!string.IsNullOrEmpty(file.FileUrl))
             {
-                File.Delete($"wwwroot/Upload/Music/MusicFiles/{file.FileUrl}");
+                File.Delete($"wwwroot/Upload/MusicFiles/{file.FileUrl}");
             }
             _DbContext.MusicFiles.Remove(file);
         }
@@ -157,6 +157,11 @@ namespace DjTaba.Services
         {
             return await _DbContext.MusicFiles.Where(s => s.Id == FileId).FirstOrDefaultAsync();
 
+        }
+        public async Task<IEnumerable<Music>> GetMusicByGenreIdAsync(int GenreId)
+        {
+            return await FindByCondition(s =>s.GenreId == GenreId)
+            .ToListAsync();
         }
     }
 }

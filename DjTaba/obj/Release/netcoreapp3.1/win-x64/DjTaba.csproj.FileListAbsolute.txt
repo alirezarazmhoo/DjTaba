@@ -752,3 +752,5 @@ C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\win-x64\Sy
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\win-x64\Newtonsoft.Json.Bson.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\win-x64\Razor\Views\Genres\Index.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\win-x64\Razor\Views\Musics\Index.cshtml.g.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\win-x64\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\win-x64\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll

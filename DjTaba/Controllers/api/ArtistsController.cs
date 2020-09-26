@@ -34,19 +34,18 @@ namespace DjTaba.Controllers.api
             }
 
         }
-        [Route("GetById/{id}")]
-        public async Task<ActionResult> GetById(int id)
+        [Route("GetById")]
+        public async Task<ActionResult> GetById(int Id)
         {
             try
             {
-                Artist artistItem = await _unitofwork.IArtistRepo.GetArtistByIdAsync(id); 
+                Artist artistItem = await _unitofwork.IArtistRepo.GetArtistByIdAsync(Id); 
                 if(artistItem is null)
                 {
-                    return BadRequest("ItemNotFound !");
+                    return BadRequest($"The Id By {Id} Is Not Found !");
                 }
                 else
                 {
-
                 return Ok(artistItem);
                 }
             }

@@ -16,6 +16,7 @@ namespace DjTaba.Infrastructure
         Task DeleteMusic(Music music);
         void DeleteMusicFile(MusicFiles file);
         Task<MusicFiles> GetMusicFileByIdAsync(int FileId);
+        Task<IEnumerable<Music>> GetMusicByGenreIdAsync(int GenreId);
 
     }
 }
