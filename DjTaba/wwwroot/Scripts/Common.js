@@ -79,13 +79,14 @@ function PostAjax(ActionName, Parameters, redirecturl) {
             
         }
         else if (Parameters[i].special === 'music') {
-
             $.each($(".MusicUrl"), function (i, obj) {
                 $.each(obj.files, function (j, file) {
                     fd.append("musicfiles", file);
                 });
             });
-
+        }
+        else if (Parameters[i].special === 'siglefile') {
+            fd.append("pictiremusic", $('#' + Parameters[i].htmlname + '')[0].files[0]);
         }
         else {
         fd.append(Parameters[i].id, $('#' + Parameters[i].htmlname + '').val());
@@ -201,19 +202,9 @@ function EditAjax(ActionName, id) {
                         if (this.specialtypefile == "Picture") {
                             MusicFilescontent +='<div id= "' + this.id + '"><img src="../Upload/MusicFiles/' + this.url + '" style="width: 70px; height: 60px;id="' + this.id + '" " /><button type="button"  class="btn btn-danger btn-sm btnremovefile"   style="width:30px;margin-left:30%;"><i class="fa fa-remove"></i></button></div>';
                         }
-                        if (this.specialtypefile == "Video") {
-                  
-                            MusicFilescontent +='<div id= "' + this.id + '">< video width = "60" height = "40" autoplay > <source src="../Upload/MusicFiles/' + this.url + '" ></video><button type="button"  class="btn btn-danger btn-sm btnremovefile"   style="width:30px;margin-left:30%;"><i class="fa fa-remove"></i></button></div>';
-                        }
-
                         $('#RemoveMusicFilesItems').html(MusicFilescontent);
-
                     }); 
-                }
-
-
-                
-
+                }             
                 $('#myModal').modal('show');
             }
             else {

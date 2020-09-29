@@ -19,6 +19,41 @@ namespace DjTaba.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DjTaba.Models.Album", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MainImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhotoCreator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("PublishedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<long>("View")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("Albums");
+                });
+
             modelBuilder.Entity("DjTaba.Models.Artist", b =>
                 {
                     b.Property<int>("Id")
@@ -58,6 +93,31 @@ namespace DjTaba.Data.Migrations
                     b.ToTable("ArtistImages");
                 });
 
+            modelBuilder.Entity("DjTaba.Models.ArtistToAlbum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ArtistId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
+
+                    b.HasIndex("ArtistId");
+
+                    b.ToTable("ArtistToAlbums");
+                });
+
             modelBuilder.Entity("DjTaba.Models.ArtistToMusic", b =>
                 {
                     b.Property<int>("Id")
@@ -83,6 +143,46 @@ namespace DjTaba.Data.Migrations
                     b.ToTable("ArtistToMusic");
                 });
 
+            modelBuilder.Entity("DjTaba.Models.ClientToAlbum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Ip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
+
+                    b.ToTable("ClientToAlbums");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.ClientToPlayList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Ip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PlayListId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PlayListId");
+
+                    b.ToTable("ClientToPlayLists");
+                });
+
             modelBuilder.Entity("DjTaba.Models.Genre", b =>
                 {
                     b.Property<int>("Id")
@@ -97,6 +197,26 @@ namespace DjTaba.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.ImagesToAlbum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
+
+                    b.ToTable("ImagesToAlbums");
                 });
 
             modelBuilder.Entity("DjTaba.Models.Music", b =>
@@ -114,6 +234,9 @@ namespace DjTaba.Data.Migrations
 
                     b.Property<string>("CoverArt")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
@@ -137,6 +260,9 @@ namespace DjTaba.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhotoCreator")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PictureMusicUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quality")
@@ -185,6 +311,106 @@ namespace DjTaba.Data.Migrations
                     b.HasIndex("MusicId");
 
                     b.ToTable("MusicFiles");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.MusicToAlbum", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("AlbumId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MusicId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AlbumId");
+
+                    b.HasIndex("MusicId");
+
+                    b.ToTable("MusicToAlbums");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.PlayList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MusicsCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("View")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GenreId");
+
+                    b.ToTable("PlayLists");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.PlayListToMusic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("MusicId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PlayListId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MusicId");
+
+                    b.HasIndex("PlayListId");
+
+                    b.ToTable("PlayListToMusics");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.Video", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Videos");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -387,6 +613,15 @@ namespace DjTaba.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DjTaba.Models.Album", b =>
+                {
+                    b.HasOne("DjTaba.Models.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DjTaba.Models.ArtistImages", b =>
                 {
                     b.HasOne("DjTaba.Models.Artist", "Artist")
@@ -394,6 +629,17 @@ namespace DjTaba.Data.Migrations
                         .HasForeignKey("ArtistId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DjTaba.Models.ArtistToAlbum", b =>
+                {
+                    b.HasOne("DjTaba.Models.Album", "Album")
+                        .WithMany("ArtistToAlbums")
+                        .HasForeignKey("AlbumId");
+
+                    b.HasOne("DjTaba.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistId");
                 });
 
             modelBuilder.Entity("DjTaba.Models.ArtistToMusic", b =>
@@ -409,6 +655,31 @@ namespace DjTaba.Data.Migrations
                         .HasForeignKey("MusicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DjTaba.Models.ClientToAlbum", b =>
+                {
+                    b.HasOne("DjTaba.Models.Album", "Album")
+                        .WithMany()
+                        .HasForeignKey("AlbumId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DjTaba.Models.ClientToPlayList", b =>
+                {
+                    b.HasOne("DjTaba.Models.PlayList", "PlayList")
+                        .WithMany()
+                        .HasForeignKey("PlayListId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DjTaba.Models.ImagesToAlbum", b =>
+                {
+                    b.HasOne("DjTaba.Models.Album", "Album")
+                        .WithMany("ImagesToAlbums")
+                        .HasForeignKey("AlbumId");
                 });
 
             modelBuilder.Entity("DjTaba.Models.Music", b =>
@@ -427,6 +698,37 @@ namespace DjTaba.Data.Migrations
                         .HasForeignKey("MusicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("DjTaba.Models.MusicToAlbum", b =>
+                {
+                    b.HasOne("DjTaba.Models.Album", "Album")
+                        .WithMany("MusicToAlbums")
+                        .HasForeignKey("AlbumId");
+
+                    b.HasOne("DjTaba.Models.Music", "Music")
+                        .WithMany()
+                        .HasForeignKey("MusicId");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.PlayList", b =>
+                {
+                    b.HasOne("DjTaba.Models.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DjTaba.Models.PlayListToMusic", b =>
+                {
+                    b.HasOne("DjTaba.Models.Music", "Music")
+                        .WithMany("PlayListToMusics")
+                        .HasForeignKey("MusicId");
+
+                    b.HasOne("DjTaba.Models.PlayList", "PlayList")
+                        .WithMany("PlayListToMusics")
+                        .HasForeignKey("PlayListId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

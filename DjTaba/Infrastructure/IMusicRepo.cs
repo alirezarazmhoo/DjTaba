@@ -12,11 +12,12 @@ namespace DjTaba.Infrastructure
         Task<IEnumerable<Music>> GetAllMusicsAsync();
         Task<Music> GetMusicByIdAsync(int musicId);
         Task<IEnumerable<Music>> GetMusicWithDetailsAsync(string txtsearch);
-        void CreateOrUpdateMusic(Music music, IFormFile Musicfile, IFormFile[] OtherFiles , string[] ArtistsId);
+        void CreateOrUpdateMusic(Music music, IFormFile Musicfile, IFormFile[] OtherFiles , string[] ArtistsId , IFormFile pictiremusic);
         Task DeleteMusic(Music music);
         void DeleteMusicFile(MusicFiles file);
         Task<MusicFiles> GetMusicFileByIdAsync(int FileId);
         Task<IEnumerable<Music>> GetMusicByGenreIdAsync(int GenreId);
+        Task<IEnumerable<Music>> GetNewstMusicsAsync();
 
     }
 }

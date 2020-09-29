@@ -22,13 +22,14 @@ namespace DjTaba.Models
 		public string AbutMusic { get; set; }
 		public string SongText { get; set; }
 		public string MusicUrl { get; set; }
+		public string PictureMusicUrl { get; set; }
 		public DateTime RelaseDate { get; set; } = DateTime.MinValue;
 		public DateTime MixDate { get; set; } = DateTime.MinValue;
-
+		public DateTime CreateDate { get; set; } = DateTime.Now;
 		public int Size { get; set; } = 0;
 		public int Quality { get; set; } = 0; 
 		public ICollection<MusicFiles>  MusicFiles { get; set; }
 		public ICollection<ArtistToMusic> ArtistToMusics { get; set; }
-
+		public ICollection<PlayListToMusic> PlayListToMusics { get; set; }
 	}
 }

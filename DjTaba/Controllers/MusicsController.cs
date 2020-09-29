@@ -41,7 +41,7 @@ namespace DjTaba.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Register(Music music,string[] ArtistsId, int? MusicId, IFormFile file, IFormFile[] musicfiles)
+        public async Task<JsonResult> Register(Music music,string[] ArtistsId, int? MusicId, IFormFile file, IFormFile[] musicfiles , IFormFile pictiremusic)
         {
             try
             {
@@ -59,7 +59,21 @@ namespace DjTaba.Controllers
                     {
                         return Json(new { success = false, responseText = "Incorrect Music  Format !" });
                     }
-                    _unitofwork.IMusicRepo.CreateOrUpdateMusic(music , file, musicfiles, ArtistsId);
+                    if (!FormatChecker.CheckFormat(pictiremusic))
+                    {
+                        return Json(new { success = false, responseText = "Incorrect CoverMusic  Format !" });
+                    }
+                    if (musicfiles != null && musicfiles.Count() > 0)
+                    {
+                        foreach (var item in musicfiles)
+                        {
+                            if (!FormatChecker.CheckFormat(item))
+                            {
+                                return Json(new { success = false, responseText = "Incorrect MusicImages  Format !" });
+                            }
+                        }
+                    }
+                    _unitofwork.IMusicRepo.CreateOrUpdateMusic(music , file, musicfiles, ArtistsId, pictiremusic);
 
                     await _unitofwork.SaveAsync();
                     return Json(new { success = true, responseText = "Operation Completed !" });

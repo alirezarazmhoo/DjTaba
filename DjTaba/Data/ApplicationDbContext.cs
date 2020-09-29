@@ -18,5 +18,15 @@ namespace DjTaba.Data
 		public DbSet<Models.Music> Musics { get; set; }
 		public DbSet<Models.MusicFiles> MusicFiles { get; set; }
 		public DbSet<Models.ArtistToMusic> ArtistToMusic { get; set; }
+		public DbSet<Models.Video> Videos { get; set; }
+		public DbSet<Models.PlayList> PlayLists { get; set; }
+		public DbSet<Models.PlayListToMusic> PlayListToMusics { get; set; }
+		public DbSet<Models.ClientToPlayList> ClientToPlayLists { get; set; }
+		public DbSet<Models.Album> Albums { get; set; }
+		public DbSet<Models.ArtistToAlbum> ArtistToAlbums { get; set; }
+		public DbSet<Models.ImagesToAlbum> ImagesToAlbums { get; set; }
+		public DbSet<Models.MusicToAlbum> MusicToAlbums { get; set; }
+		public DbSet<Models.ClientToAlbum> ClientToAlbums { get; set; }
+
 	}
 }

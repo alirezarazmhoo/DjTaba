@@ -36,7 +36,7 @@ namespace DjTaba.Utility
         public static bool CheckVideoFormat(IFormFile File)
         {
             string[] mediaExtensions = {
-            ".AVI", ".MP4", ".DIVX", ".WMV" , ".mkv", 
+            ".AVI", ".MP4", ".DIVX", ".WMV" , ".mkv","application/octet-stream", 
             };
             return -1 != Array.IndexOf(mediaExtensions, File.ContentType);
         }

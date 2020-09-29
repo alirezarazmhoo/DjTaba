@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using DjTaba.Infrastructure;
 using DjTaba.Services;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 namespace DjTaba
 {
@@ -40,6 +41,7 @@ namespace DjTaba
 	       .AddNewtonsoftJson(options =>
 	      options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+			services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 		}
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

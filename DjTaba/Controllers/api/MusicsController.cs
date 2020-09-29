@@ -71,5 +71,17 @@ namespace DjTaba.Controllers.api
                 return BadRequest(ex.Message);
             }
         }
+        [Route("GetNewests")]
+        public async Task<ActionResult> GetNewests()
+        {
+            try
+            {
+                return Ok(await _unitofwork.IMusicRepo.GetNewstMusicsAsync());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

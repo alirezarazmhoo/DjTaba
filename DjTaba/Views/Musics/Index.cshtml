@@ -408,11 +408,20 @@
                             <button type="button" style="height:20%;margin-left:15px;top:0;" class="btn btn-primary" onclick="MusicUrl.click()"><i class="fa fa-music"></i> Choose Music  </button>
                             <div id="MusicItem" style="width:400px;height:auto;margin-left:5px;margin-top:5px">
                             </div>
-                         
+
                         </div>
                     </div>
                     <div class="form-group " style="margin-right:5px">
-                        <label for="exampleInputEmail1"> SelecMediaFilesAbutThisMusic :</label>
+                        <label for="exampleInputEmail1"> SelecMusicCoverPicutre :</label>
+                        <div id="main-container">
+                            <input display="Music" id="PicutreMusicUrl" name="PicutreMusicUrl" class="TheFile" onchange="SetPictures('PicutreMusicUrl','PicutreMusicItem');" style="display:none" type="file"  required>
+                            <button type="button" style="height:20%;margin-left:15px;top:0;" class="btn btn-primary" onclick="PicutreMusicUrl.click()"><i class="fa fa-photo"></i> Choose Picture  </button>
+                            <div id="PicutreMusicItem" style="width:400px;height:auto;margin-left:5px;margin-top:5px">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group " style="margin-right:5px">
+                        <label for="exampleInputEmail1"> ChooseOtherPictures :</label>
                         <div id="main-container">
                             <input display="MusicFiles" id="MusicFiles" name="MusicFiles" class="MusicUrl" onchange="SetPictures('MusicFiles','MusicFilesItems');" style="display:none" multiple type="file">
                             <button type="button" style="height:20%;margin-left:15px;top:0;" class="btn btn-primary" onclick="MusicFiles.click()"><i class="fa fa-file-audio-o"></i> Choose   </button>
@@ -420,19 +429,15 @@
 
                             </div>
                             <div id="RemoveMusicFilesItems" style="width:auto;height:auto;margin-left:5px;">
+
                             </div>
                         </div>
-
-
                     </div>
-
                 </form>
             </div>
             <div class="modal-footer">
-
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-success" onclick="Save();">Save</button>
-
             </div>
         </div>
     </div>
@@ -485,12 +490,10 @@
             { id: "MixDate", htmlname: "MixDate", special: "" },
             { id: "Size", htmlname: "Size", special: "" },
 			{ id: "Quality", htmlname: "Quality", special: "" },
-            { id: "MusicFiles", htmlname: "MusicFiles", special: "file" }
+		    { id: "MusicFiles", htmlname: "MusicFiles", special: "file" },
+            { id: "PicutreMusicUrl", htmlname: "PicutreMusicUrl", special: "siglefile" }
 			];
 			PostAjax('../Musics/Register', Parameters, "../Musics/Index");
-
-
-            
         }
     }
     function AssignButtonClicked(elem) {

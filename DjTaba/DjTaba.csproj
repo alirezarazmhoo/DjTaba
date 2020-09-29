@@ -7646,6 +7646,9 @@
     <Folder Include="wwwroot\Upload\Music\" />
     <Folder Include="wwwroot\Upload\MusicFiles\" />
     <Folder Include="wwwroot\Upload\ImageArtist\" />
+    <Folder Include="wwwroot\Upload\MusicCover\" />
+    <Folder Include="wwwroot\Upload\Albums\" />
+    <Folder Include="wwwroot\Upload\PlayList\" />
   </ItemGroup>
 
 </Project>

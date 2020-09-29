@@ -25,7 +25,13 @@ namespace DjTaba.Services
 			  .OrderByDescending(s => s.Id)
 			  .ToListAsync();
 		}
-		public async Task<Music> GetMusicByIdAsync(int musicId)
+        public async Task<IEnumerable<Music>> GetNewstMusicsAsync()
+        {
+            return await FindAll(s => s.MusicFiles).Include(s => s.MusicFiles).Include(s => s.Genre).Include(s => s.ArtistToMusics)
+              .OrderByDescending(s => s.CreateDate)
+              .ToListAsync();
+        }
+        public async Task<Music> GetMusicByIdAsync(int musicId)
 		{
 			return await FindByCondition(s => s.Id.Equals(musicId)).Include(s => s.MusicFiles).Include(s => s.ArtistToMusics)
                 .FirstOrDefaultAsync();
@@ -38,7 +44,7 @@ namespace DjTaba.Services
 			s.PhotoCreator.Contains(txtsearch) )
 				.ToListAsync();
 		}
-        public void  CreateOrUpdateMusic(Music music, IFormFile Musicfile, IFormFile[] OtherFiles, string[] ArtistsId)
+        public void  CreateOrUpdateMusic(Music music, IFormFile Musicfile, IFormFile[] OtherFiles, string[] ArtistsId , IFormFile pictiremusic)
         {
             string[] _ArtistId = new string[] { };
            List<ArtistToMusic>  toMusics = new List<ArtistToMusic>();
@@ -51,9 +57,17 @@ namespace DjTaba.Services
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         Musicfile.CopyTo(fileStream);
-
                     }
-
+                    music.MusicUrl = fileName;
+                }
+                if (pictiremusic != null && pictiremusic.Length > 1)
+                {
+                    var fileName = Path.GetFileName(pictiremusic.FileName);
+                    var filePath = Path.Combine(Directory.GetCurrentDirectory(), @"wwwroot\Upload\MusicCover", fileName);
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        pictiremusic.CopyTo(fileStream);
+                    }
                     music.MusicUrl = fileName;
                 }
                 _DbContext.Musics.Add(music);
@@ -81,9 +95,12 @@ namespace DjTaba.Services
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
                             item.CopyTo(stream);       
-                            _DbContext.MusicFiles.Add(new MusicFiles() { FileUrl = fileName , MusicId = music.Id ,
-                            Type = FormatChecker.CheckFormat(item) == true ? FileType.Picture : 
-                            FormatChecker.CheckVideoFormat(item) == true ? FileType.Video : FileType.Other});
+                            _DbContext.MusicFiles.Add(new MusicFiles()
+                            {
+                                FileUrl = fileName,
+                                MusicId = music.Id,
+                                Type = FileType.Picture
+                            });
                         }
                     }
                 }
