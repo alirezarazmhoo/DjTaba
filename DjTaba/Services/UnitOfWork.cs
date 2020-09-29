@@ -19,6 +19,7 @@ namespace DjTaba.Services
 		private IPlayListRepo _IPlayListRepo;
 		private IAlbumRepo _IAlbumRepo;
 		private ISearchRepo _ISearchRepo;
+		private ITicketRepo _ITicketRepo;
 		public UnitOfWork(ApplicationDbContext DbContext)
 		{
 			_DbContext = DbContext;
@@ -74,6 +75,13 @@ namespace DjTaba.Services
 			get
 			{
 				return _ISearchRepo = _ISearchRepo ?? new SearchRepo(_DbContext);
+			}
+		}
+		public ITicketRepo ITicketRepo
+		{
+			get
+			{
+				return _ITicketRepo = _ITicketRepo ?? new TicketRepo(_DbContext);
 			}
 		}
 	}

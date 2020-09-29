@@ -33,7 +33,12 @@ namespace DjTaba
 			services.AddDbContext<ApplicationDbContext>(options =>
 			 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 			services.AddTransient<IUnitOfWorkRepo, UnitOfWork>();
-			services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+			services.AddDefaultIdentity<ApplicationUser>(options => {
+			options.SignIn.RequireConfirmedAccount = false;
+			options.Password.RequireUppercase = false;
+			options.Password.RequireNonAlphanumeric = false;
+			options.Password.RequireLowercase = false;
+			}).AddRoles<IdentityRole>()
 			.AddEntityFrameworkStores<ApplicationDbContext>();
 			services.AddControllersWithViews();
 			services.AddControllersWithViews().AddRazorRuntimeCompilation();

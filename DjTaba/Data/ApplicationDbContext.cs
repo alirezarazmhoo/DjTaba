@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DjTaba.Data
 {
-	public class ApplicationDbContext : IdentityDbContext
+	public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 	{
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
@@ -27,6 +27,8 @@ namespace DjTaba.Data
 		public DbSet<Models.ImagesToAlbum> ImagesToAlbums { get; set; }
 		public DbSet<Models.MusicToAlbum> MusicToAlbums { get; set; }
 		public DbSet<Models.ClientToAlbum> ClientToAlbums { get; set; }
+		public DbSet<Models.Ticket> Tickets { get; set; }
+
 
 	}
 }

@@ -34,7 +34,7 @@ namespace DjTaba.Controllers
                 }
              int pageSize =3;
              var artists = shouldsearch == false ? await  _unitofwork.IArtistRepo.GetAllArtistsAsync() : await _unitofwork.IArtistRepo.GetArtistWithDetailsAsync(searchString);
-            return View( PaginatedList<Artist>.CreateAsync(artists.AsQueryable(), pageNumber ?? 1, pageSize));
+            return View(PaginatedList<Artist>.CreateAsync(artists.AsQueryable(), pageNumber ?? 1, pageSize));
             }
             catch(Exception ex)
             {
