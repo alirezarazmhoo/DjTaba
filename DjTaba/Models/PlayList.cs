@@ -14,7 +14,9 @@ namespace DjTaba.Models
 		public Genre Genre { get; set; }
 		public int MusicsCount { get; set; }
 		public string ImageUrl { get; set; }
+		public string ImageUrlThumbNail { get; set; }
 		public long View { get; set; }
-		public  ICollection<PlayListToMusic> PlayListToMusics { get; set; }
+
+		//public ICollection<PlayListToMusic> PlayListToMusics { get; set; }
 	}
 }

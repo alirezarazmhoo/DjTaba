@@ -44,7 +44,13 @@ namespace DjTaba.Models.ViewModel
 		public IEnumerable<AlbumChild> Album { get; set; }
 		public IEnumerable<PlayListChild> PlayList { get; set; }
 		public IEnumerable<MusicChild> Music { get; set; }
-
+		public IEnumerable<Video> Videos { get; set; }
+		public IEnumerable<Artist> Artists { get; set; }
+	}
+	public class PlayListAndMusic
+	{
+		public PlayList PlayList { get; set; }
+		public IEnumerable<Music>  PlayListToMusics { get; set; }
 	}
 	public sealed class AlbumChild : ChildBase
 	{

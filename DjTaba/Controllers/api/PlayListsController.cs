@@ -23,11 +23,11 @@ namespace DjTaba.Controllers.api
             _accessor = accessor;
         }
         [Route("GetAll")]
-        public async Task<ActionResult> GetAll()
+        public async Task<ActionResult> GetAll(int? pageNumber)
         {
             try
             {
-                return Ok(await _unitofwork.IPlayListRepo.GetAllPlayListAsync());
+                return Ok(await _unitofwork.IPlayListRepo.GetSummaryAllPlayListAsync(pageNumber));
             }
             catch (Exception ex)
             {
@@ -40,7 +40,7 @@ namespace DjTaba.Controllers.api
             try
             {
                 var Item = await _unitofwork.IPlayListRepo.GetPlaylistByIdAsync(Id);
-                if (Item is null || Item.Count() == 0)
+                if (Item is null)
                 {
                     return BadRequest($"The Id By {Id} Is Not Found !");
                 }
@@ -55,11 +55,11 @@ namespace DjTaba.Controllers.api
             }
         }
         [Route("GetNewests")]
-        public async Task<ActionResult> GetNewests()
+        public async Task<ActionResult> GetNewests(int? pageNumber)
         {
             try
             {
-                return Ok(await _unitofwork.IPlayListRepo.GetAllNewstPlayListAsync());
+                return Ok(await _unitofwork.IPlayListRepo.GetAllNewstPlayListAsync(pageNumber));
             }
             catch (Exception ex)
             {
@@ -67,11 +67,11 @@ namespace DjTaba.Controllers.api
             }
         }
         [Route("GetMostView")]
-        public async Task<ActionResult> GetMostView()
+        public async Task<ActionResult> GetMostView(int? pageNumber)
         {
             try
             {
-             return Ok(await _unitofwork.IPlayListRepo.GetAllMostViewedPlayListAsync());
+             return Ok(await _unitofwork.IPlayListRepo.GetAllMostViewedPlayListAsync(pageNumber));
             }
             catch (Exception ex)
             {
@@ -79,13 +79,11 @@ namespace DjTaba.Controllers.api
             }
         }
         [Route("AddView")]
-        public async Task<ActionResult> AddView(int Id)
+        public async Task<ActionResult> AddView(int Id , long DeviceId)
         {
             try
-            {
-               
-                var ip = _accessor.ActionContext.HttpContext.Connection.RemoteIpAddress.ToString();
-                await _unitofwork.IPlayListRepo.AddViewToPlayList(Id, ip);
+            {       
+                await _unitofwork.IPlayListRepo.AddViewToPlayList(Id, DeviceId.ToString());
                 return Ok("Every Thing is OK !");
             }
             catch (Exception ex)

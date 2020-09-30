@@ -18,11 +18,11 @@ namespace DjTaba.Controllers.api
             _unitofwork = unitOfWork;
         }
         [Route("Search")]
-        public async Task<ActionResult> GetAll(string txtsearch)
+        public async Task<ActionResult> GetAll(string txtsearch , int pageNumber)
         {
             try
             {
-                return Ok(await _unitofwork.ISearchRepo.SearchByEveryThing(txtsearch));
+                return Ok(await _unitofwork.ISearchRepo.SearchByEveryThing(txtsearch , pageNumber));
             }
             catch (Exception ex)
             {

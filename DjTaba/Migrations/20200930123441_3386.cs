@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DjTaba.Data.Migrations
+namespace DjTaba.Migrations
 {
-    public partial class initial9944657476765554 : Migration
+    public partial class _3386 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

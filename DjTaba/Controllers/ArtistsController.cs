@@ -19,8 +19,7 @@ namespace DjTaba.Controllers
         private IUnitOfWorkRepo _unitofwork;
 
         public ArtistsController(IUnitOfWorkRepo unitOfWork)
-        {
-            
+        {  
             _unitofwork = unitOfWork;
         }
         public async Task< IActionResult> Index(string searchString , int? pageNumber)

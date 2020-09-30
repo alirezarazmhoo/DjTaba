@@ -8,6 +8,6 @@ namespace DjTaba.Infrastructure
 {
  public	interface ISearchRepo
 	{
-		Task<SearchByEveryThingViewModel> SearchByEveryThing(string txtsearch);
+		Task<SearchByEveryThingViewModel> SearchByEveryThing(string txtsearch , int? pageNumber);
 	}
 }

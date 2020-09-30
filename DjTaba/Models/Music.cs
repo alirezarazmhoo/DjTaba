@@ -30,6 +30,6 @@ namespace DjTaba.Models
 		public int Quality { get; set; } = 0; 
 		public ICollection<MusicFiles>  MusicFiles { get; set; }
 		public ICollection<ArtistToMusic> ArtistToMusics { get; set; }
-		public ICollection<PlayListToMusic> PlayListToMusics { get; set; }
+		//public ICollection<PlayListToMusic> PlayListToMusics { get; set; }
 	}
 }
