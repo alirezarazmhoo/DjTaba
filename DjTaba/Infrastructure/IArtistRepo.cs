@@ -13,7 +13,7 @@ namespace DjTaba.Infrastructure
         Task<Artist> GetArtistByIdAsync(int ownerId);
          Task<IEnumerable<Artist>> GetArtistWithDetailsAsync(string txtsearch);
         void CreateOrUpdateArtist(Artist artist , IFormFile[] file);
-        void DeleteArtist(Artist artist);
+        Task  DeleteArtist(Artist owner); 
          Task<IEnumerable<ArtistImages>> GetArtistPicture(int artistId);
         Task<ArtistImages> GetArtistPictureByIdAsync(int FileId);
         void DeleteArtistPicture(ArtistImages file);

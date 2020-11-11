@@ -1,4 +1,5 @@
 ﻿using DjTaba.Models;
+using DjTaba.Models.ViewModel;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ namespace DjTaba.Infrastructure
         Task<MusicFiles> GetMusicFileByIdAsync(int FileId);
         Task<IEnumerable<Music>> GetMusicByGenreIdAsync(int GenreId);
         Task<IEnumerable<Music>> GetNewstMusicsAsync();
+        Task<IEnumerable<MusicChild>> GetSummaryMostViewedAllMusicAsync(int? pageNumber);
+        Task AddViewToMusic(int id, string address);
 
     }
 }

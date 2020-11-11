@@ -52,7 +52,7 @@ namespace DjTaba.Services
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
                         item.CopyTo(stream);
-                        _DbContext.ArtistImages.Add(new ArtistImages() { ImageUrl = fileName, ArtistId = artist.Id });
+                        _DbContext.ArtistImages.Add(new ArtistImages() { ImageUrl = "/Upload/ImageArtist/"+ fileName, ArtistId = artist.Id });
                     }
                 }
             }
@@ -69,15 +69,23 @@ namespace DjTaba.Services
                         using (var stream = new FileStream(filePath, FileMode.Create))
                         {
                             item.CopyTo(stream);
-                            _DbContext.ArtistImages.Add(new ArtistImages() { ImageUrl = fileName, ArtistId = artist.Id });
+                            _DbContext.ArtistImages.Add(new ArtistImages() { ImageUrl = "/Upload/ImageArtist/" + fileName, ArtistId = artist.Id });
                         }
                     }
                 }
             }
         }
-        public void DeleteArtist(Artist owner)
+        public async Task DeleteArtist(Artist owner)
         {
-         
+            var ArtistItem =await  GetArtistByIdAsync(owner.Id);
+
+            if (ArtistItem.ArtistImages.Count > 0)
+            {
+                foreach (var item in ArtistItem.ArtistImages)
+                {
+                    File.Delete($"wwwroot/{item.ImageUrl}");
+                }
+            }
             Delete(owner);
         }
         public async Task<IEnumerable<ArtistImages>> GetArtistPicture(int artistId)
@@ -94,7 +102,7 @@ namespace DjTaba.Services
         {
             if (!string.IsNullOrEmpty(file.ImageUrl))
             {
-                File.Delete($"wwwroot/Upload/ImageArtist/{file.ImageUrl}");
+                File.Delete($"wwwroot/{file.ImageUrl}");
             }
             _DbContext.ArtistImages.Remove(file);
         }

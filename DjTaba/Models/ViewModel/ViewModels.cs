@@ -60,6 +60,7 @@ namespace DjTaba.Models.ViewModel
 	}
 	public sealed class MusicChild : ChildBase
 	{
+		public ICollection<ArtistToMusic> Artists { get; set; }
 	}
 	public abstract class ChildBase
 	{
@@ -68,4 +69,10 @@ namespace DjTaba.Models.ViewModel
 		public string Url { get; set; }
 
 	}
+
+	public sealed class WebApiResponse
+	{
+		public string Message { get; set; }
+	}
+
 }

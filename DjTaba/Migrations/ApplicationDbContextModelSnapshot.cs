@@ -104,6 +104,9 @@ namespace DjTaba.Migrations
                     b.Property<string>("MainImageUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MainImageUrlThumbNail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -232,6 +235,26 @@ namespace DjTaba.Migrations
                     b.ToTable("ClientToAlbums");
                 });
 
+            modelBuilder.Entity("DjTaba.Models.ClientToMusic", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Ip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MusicId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MusicId");
+
+                    b.ToTable("ClientToMusic");
+                });
+
             modelBuilder.Entity("DjTaba.Models.ClientToPlayList", b =>
                 {
                     b.Property<int>("Id")
@@ -250,6 +273,21 @@ namespace DjTaba.Migrations
                     b.HasIndex("PlayListId");
 
                     b.ToTable("ClientToPlayLists");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.ComingSoon", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ComingSoons");
                 });
 
             modelBuilder.Entity("DjTaba.Models.Genre", b =>
@@ -334,6 +372,9 @@ namespace DjTaba.Migrations
                     b.Property<string>("PictureMusicUrl")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PictureMusicUrlThumbNail")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Quality")
                         .HasColumnType("int");
 
@@ -351,6 +392,9 @@ namespace DjTaba.Migrations
 
                     b.Property<string>("Speed")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Views")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -405,6 +449,27 @@ namespace DjTaba.Migrations
                     b.HasIndex("MusicId");
 
                     b.ToTable("MusicToAlbums");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.MyExepction", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("InnderExceptionMessage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StackTrace")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MyExepctions");
                 });
 
             modelBuilder.Entity("DjTaba.Models.PlayList", b =>
@@ -462,6 +527,29 @@ namespace DjTaba.Migrations
                     b.HasIndex("PlayListId");
 
                     b.ToTable("PlayListToMusics");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.Slider", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("MusicId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WebSiteUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MusicId");
+
+                    b.ToTable("Sliders");
                 });
 
             modelBuilder.Entity("DjTaba.Models.Ticket", b =>
@@ -694,6 +782,15 @@ namespace DjTaba.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("DjTaba.Models.ClientToMusic", b =>
+                {
+                    b.HasOne("DjTaba.Models.Music", "Music")
+                        .WithMany()
+                        .HasForeignKey("MusicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("DjTaba.Models.ClientToPlayList", b =>
                 {
                     b.HasOne("DjTaba.Models.PlayList", "PlayList")
@@ -755,8 +852,15 @@ namespace DjTaba.Migrations
                         .HasForeignKey("MusicId");
 
                     b.HasOne("DjTaba.Models.PlayList", "PlayList")
-                        .WithMany("PlayListToMusics")
+                        .WithMany()
                         .HasForeignKey("PlayListId");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.Slider", b =>
+                {
+                    b.HasOne("DjTaba.Models.Music", "Music")
+                        .WithMany()
+                        .HasForeignKey("MusicId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

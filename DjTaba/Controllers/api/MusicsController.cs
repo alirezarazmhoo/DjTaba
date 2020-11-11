@@ -83,5 +83,31 @@ namespace DjTaba.Controllers.api
                 return BadRequest(ex.Message);
             }
         }
+        [Route("GetMostViewd")]
+        public async Task<ActionResult> GetMostViewd(int? pageNumber)
+        {
+            try
+            {
+                return Ok(await _unitofwork.IMusicRepo.GetSummaryMostViewedAllMusicAsync(pageNumber));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+        [Route("AddView")]
+        public async Task<ActionResult> AddView(int Id, long DeviceId)
+        {
+            try
+            {
+                await _unitofwork.IMusicRepo.AddViewToMusic(Id, DeviceId.ToString());
+                return Ok("Every Thing is OK !");
+            }
+            catch (Exception)
+            {
+                return BadRequest($"The Music Id By {DeviceId} Does Not Found !");
+            }
+
+        }
     }
 }

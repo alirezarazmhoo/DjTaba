@@ -426,8 +426,6 @@ C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\Newtonsoft.J
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Views\Musics\Index.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
-C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\DjTaba.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\DjTaba.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Login.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Logout.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml.g.cs
@@ -442,3 +440,10 @@ C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Areas\
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\DjTaba.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\DjTaba.MvcApplicationPartsAssemblyInfo.cache

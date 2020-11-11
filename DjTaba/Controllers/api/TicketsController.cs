@@ -6,6 +6,8 @@ using DjTaba.Infrastructure;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using DjTaba.Models;
+using DjTaba.Models.ViewModel;
+
 namespace DjTaba.Controllers.api
 {
     [Route("api/[controller]")]
@@ -13,6 +15,8 @@ namespace DjTaba.Controllers.api
     public class TicketsController : ControllerBase
     {
         private IUnitOfWorkRepo _unitofwork;
+        WebApiResponse response = new WebApiResponse();
+
         public TicketsController(IUnitOfWorkRepo unitOfWork)
         {
             _unitofwork = unitOfWork;
@@ -23,11 +27,13 @@ namespace DjTaba.Controllers.api
             try
             {
                 await _unitofwork.ITicketRepo.Add(ticket);
-                return Ok();
+                response.Message = "Your ticket has been sumbited";
+                return Ok(response);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                return BadRequest(ex.Message);
+                response.Message = "Unfortunately ticket not sumbited ! ";
+                return BadRequest(response);
             }
 
         }

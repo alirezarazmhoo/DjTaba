@@ -13,5 +13,8 @@ namespace DjTaba.Models
 		public Music Music { get; set; }
 		public int? AlbumId { get; set; }
 		public Album Album { get; set; }
+		public string MusicThumbNailPicture { get; set; }
+
+
 	}
 }

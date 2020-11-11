@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DjTaba.Data;
 using DjTaba.Infrastructure;
 using DjTaba.Models;
 using DjTaba.Models.ViewModel;
@@ -14,11 +15,13 @@ namespace DjTaba.Controllers
     public class MusicsController : Controller
     {
         private IUnitOfWorkRepo _unitofwork;
+        private ApplicationDbContext _context;
 
-        public MusicsController(IUnitOfWorkRepo unitOfWork)
+
+        public MusicsController(IUnitOfWorkRepo unitOfWork , ApplicationDbContext context)
         {
-
             _unitofwork = unitOfWork;
+            _context = context;
         }
         public async Task< IActionResult> Index(string searchString, int? pageNumber)
         {
@@ -59,29 +62,34 @@ namespace DjTaba.Controllers
                     {
                         return Json(new { success = false, responseText = "Incorrect Music  Format !" });
                     }
-                    if (!FormatChecker.CheckFormat(pictiremusic))
-                    {
-                        return Json(new { success = false, responseText = "Incorrect CoverMusic  Format !" });
-                    }
-                    if (musicfiles != null && musicfiles.Count() > 0)
-                    {
-                        foreach (var item in musicfiles)
-                        {
-                            if (!FormatChecker.CheckFormat(item))
-                            {
-                                return Json(new { success = false, responseText = "Incorrect MusicImages  Format !" });
-                            }
-                        }
-                    }
+                    //if (!FormatChecker.CheckFormat(pictiremusic))
+                    //{
+                    //    return Json(new { success = false, responseText = "Incorrect CoverMusic  Format !" });
+                    //}
+                    //if (musicfiles != null && musicfiles.Count() > 0)
+                    //{
+                    //    foreach (var item in musicfiles)
+                    //    {
+                    //        if (!FormatChecker.CheckFormat(item))
+                    //        {
+                    //            return Json(new { success = false, responseText = "Incorrect MusicImages  Format !" });
+                    //        }
+                    //    }
+                    //}
                     _unitofwork.IMusicRepo.CreateOrUpdateMusic(music , file, musicfiles, ArtistsId, pictiremusic);
-
                     await _unitofwork.SaveAsync();
                     return Json(new { success = true, responseText = "Operation Completed !" });
                 }
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, responseText = "Requset Faild !" });
+                MyExepction myExepction =new MyExepction();
+                myExepction.Message = ex.Message;
+                myExepction.InnderExceptionMessage = ex.InnerException.Message;
+                myExepction.StackTrace = ex.StackTrace;
+                _context.MyExepctions.Add(myExepction);
+               await _context.SaveChangesAsync();
+                return Json(new { success = false, responseText = "Operation Faild !"});
             }
         }
 

@@ -15,6 +15,9 @@ namespace DjTaba.Infrastructure
 		IAlbumRepo IAlbumRepo { get; }
 		ISearchRepo ISearchRepo { get; }
 		ITicketRepo ITicketRepo { get; }
+		ISliderRepo ISliderRepo { get; }
+		IComingsoonRepo IComingsoonRepo { get; }
+
 		Task SaveAsync();
 	}
 }

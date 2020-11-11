@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DjTaba.Infrastructure;
 using DjTaba.Models.ApiModels;
+using DjTaba.Models.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

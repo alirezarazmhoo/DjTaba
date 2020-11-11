@@ -15,6 +15,7 @@ namespace DjTaba.Models
 		public string PhotoCreator { get; set; }
 		public DateTime PublishedDate { get; set; }
 		public string MainImageUrl { get; set; }
+		public string MainImageUrlThumbNail { get; set; }
 		public long View { get; set; }
 		public ICollection<MusicToAlbum> MusicToAlbums { get; set; }
 		public ICollection<ImagesToAlbum>  ImagesToAlbums { get; set; }

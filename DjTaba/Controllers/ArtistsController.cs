@@ -88,19 +88,9 @@ namespace DjTaba.Controllers
 
                 }
 
-              if (Artist.ArtistImages != null)
-                {
-                 foreach (var item in Artist.ArtistImages)
-                    {
-                   if (!string.IsNullOrEmpty(item.ImageUrl))
-                   {
-                    var fileInfo = new System.IO.FileInfo($"wwwroot/Upload/ImageArtist/{item.ImageUrl}");
-                  fileInfo.Delete();
-                    }
-                      }
-               }
+    
         
-                _unitofwork.IArtistRepo.DeleteArtist(Artist);
+               await _unitofwork.IArtistRepo.DeleteArtist(Artist);
                 await _unitofwork.SaveAsync();
                 return Json(new { success = true, responseText = "Operation Completed !" });
 

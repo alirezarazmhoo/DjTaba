@@ -28,7 +28,10 @@ namespace DjTaba.Data
 		public DbSet<Models.ClientToAlbum> ClientToAlbums { get; set; }
 		public DbSet<Models.PlayListToMusic> PlayListToMusics { get; set; }
 		public DbSet<Models.Ticket> Tickets { get; set; }
-
+		public DbSet<Models.Slider> Sliders { get; set; }
+		public DbSet<Models.ClientToMusic> ClientToMusic { get; set; }
+		public DbSet<Models.ComingSoon>  ComingSoons { get; set; }
+		public DbSet<Models.MyExepction> MyExepctions { get; set; }
 
 	}
 }

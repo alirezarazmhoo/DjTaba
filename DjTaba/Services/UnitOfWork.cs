@@ -20,6 +20,10 @@ namespace DjTaba.Services
 		private IAlbumRepo _IAlbumRepo;
 		private ISearchRepo _ISearchRepo;
 		private ITicketRepo _ITicketRepo;
+		private ISliderRepo _ISliderRepo;
+		private IComingsoonRepo _IComingsoonRepo;
+
+
 		public UnitOfWork(ApplicationDbContext DbContext)
 		{
 			_DbContext = DbContext;
@@ -82,6 +86,20 @@ namespace DjTaba.Services
 			get
 			{
 				return _ITicketRepo = _ITicketRepo ?? new TicketRepo(_DbContext);
+			}
+		}
+		public ISliderRepo ISliderRepo
+		{
+			get
+			{
+				return _ISliderRepo = _ISliderRepo ?? new SliderRepo (_DbContext);
+			}
+		}
+		public IComingsoonRepo IComingsoonRepo
+		{
+			get
+			{
+				return _IComingsoonRepo = _IComingsoonRepo ?? new ComingsoonRepo(_DbContext);
 			}
 		}
 	}

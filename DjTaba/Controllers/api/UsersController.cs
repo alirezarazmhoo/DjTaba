@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using DjTaba.Data;
+using DjTaba.Models.ViewModel;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace DjTaba.Controllers.api
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;
+            WebApiResponse response = new WebApiResponse();
         public UsersController(UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager)
         {
@@ -26,6 +28,8 @@ namespace DjTaba.Controllers.api
         [HttpPost]
         public async Task<ActionResult> AddUser(InputModel Input)
         {
+
+
             try
             {
                 var user = new ApplicationUser { UserName = Input.UserName, Email = Input.Email , Birthday = Input.Birthday  };
@@ -33,16 +37,18 @@ namespace DjTaba.Controllers.api
                 string ErrorMessage = string.Empty;
                 if (result.Succeeded)
                 {
+                    response.Message = "Your account has been created ";
                     await _userManager.AddToRoleAsync(user, "Normal");
-                    return Ok();
+                    return Ok(response);
                 }
                 else
                 {
-                    foreach (var error in result.Errors)
-                    {
-                        ErrorMessage += error.Description;
-                    }
-                    return BadRequest(ErrorMessage);
+                    //foreach (var error in result.Errors)
+                    //{
+                    //    ErrorMessage += error.Description;
+                    //}
+                    response.Message = "Unfortunately your account not created !";
+                    return BadRequest(response);
                 }
             }
             catch (Exception ex)
@@ -60,12 +66,16 @@ namespace DjTaba.Controllers.api
                 var user = await _userManager.FindByIdAsync(Input.Id);
                 if(user is null)
                 {
-                    return BadRequest($"The User By Id {Input.Id} is Not Found!");
+                    response.Message = $"The User By Id {Input.Id} is Not Found!";
+
+                    return BadRequest(response);
                 }
                 var changePasswordResult = await _userManager.ChangePasswordAsync(user, Input.OldPassword, Input.NewPassword);
                 if (changePasswordResult.Succeeded)
                 {
-                    return Ok();
+                    response.Message = "Your Password Has Been Changed ";
+
+                    return Ok(response);
 
                 }
              else
@@ -75,7 +85,9 @@ namespace DjTaba.Controllers.api
                     {
                         ErrorMessage += error.Description;
                     }
-                    return BadRequest(ErrorMessage);
+                    response.Message = $"Sorry , The Operation Faild !";
+
+                    return BadRequest(response);
 
                 }
 
@@ -98,13 +110,18 @@ namespace DjTaba.Controllers.api
                     return Ok();
                 }
                 else
-                {                 
-                    return BadRequest("UserName Or Password Is InCorrect !");
+                {    
+                    response.Message = "Username or password is inCorrect !";
+
+                    return BadRequest(response);
                 }
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                response.Message = $"Sorry , the operation faild !";
+
+
+                return BadRequest(response);
             }
         }
     }
