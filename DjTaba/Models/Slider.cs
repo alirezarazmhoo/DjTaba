@@ -13,6 +13,6 @@ namespace DjTaba.Models
 		public string WebSiteUrl { get; set; }
 
 		public int? MusicId { get; set; }
-		public Music Music { get; set; }
+		//public Music Music { get; set; }
 	}
 }

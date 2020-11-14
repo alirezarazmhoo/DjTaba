@@ -35,9 +35,9 @@ namespace DjTaba.Models.ViewModel
 	public class AlbumAndDetailsViewModel
 	{
 		public Album Album { get; set; }
-		public IEnumerable<MusicToAlbum> Musics { get; set; }
-		public IEnumerable<ArtistToAlbum> Artists { get; set; }
-		public IEnumerable<ImagesToAlbum> Images { get; set; }
+		//public IEnumerable<MusicToAlbum> Musics { get; set; }
+		//public IEnumerable<ArtistToAlbum> Artists { get; set; }
+		//public IEnumerable<ImagesToAlbum> Images { get; set; }
 	}
 	public class SearchByEveryThingViewModel
 	{
@@ -50,7 +50,7 @@ namespace DjTaba.Models.ViewModel
 	public class PlayListAndMusic
 	{
 		public PlayList PlayList { get; set; }
-		public IEnumerable<Music>  PlayListToMusics { get; set; }
+		public IEnumerable<MusicChild>  PlayListToMusics { get; set; }
 	}
 	public sealed class AlbumChild : ChildBase
 	{

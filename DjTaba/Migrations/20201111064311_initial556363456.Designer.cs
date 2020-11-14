@@ -4,14 +4,16 @@ using DjTaba.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DjTaba.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201111064311_initial556363456")]
+    partial class initial556363456
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -178,15 +180,14 @@ namespace DjTaba.Migrations
                     b.Property<int?>("ArtistId")
                         .HasColumnType("int");
 
-                    b.Property<string>("ArtistPictureThumbNail")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("AlbumId");
+
+                    b.HasIndex("ArtistId");
 
                     b.ToTable("ArtistToAlbums");
                 });
@@ -450,6 +451,8 @@ namespace DjTaba.Migrations
 
                     b.HasIndex("AlbumId");
 
+                    b.HasIndex("MusicId");
+
                     b.ToTable("MusicToAlbums");
                 });
 
@@ -548,6 +551,8 @@ namespace DjTaba.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("MusicId");
 
                     b.ToTable("Sliders");
                 });
@@ -749,9 +754,13 @@ namespace DjTaba.Migrations
 
             modelBuilder.Entity("DjTaba.Models.ArtistToAlbum", b =>
                 {
-                    b.HasOne("DjTaba.Models.Album", null)
+                    b.HasOne("DjTaba.Models.Album", "Album")
                         .WithMany("ArtistToAlbums")
                         .HasForeignKey("AlbumId");
+
+                    b.HasOne("DjTaba.Models.Artist", "Artist")
+                        .WithMany()
+                        .HasForeignKey("ArtistId");
                 });
 
             modelBuilder.Entity("DjTaba.Models.ArtistToMusic", b =>
@@ -798,7 +807,7 @@ namespace DjTaba.Migrations
 
             modelBuilder.Entity("DjTaba.Models.ImagesToAlbum", b =>
                 {
-                    b.HasOne("DjTaba.Models.Album", null)
+                    b.HasOne("DjTaba.Models.Album", "Album")
                         .WithMany("ImagesToAlbums")
                         .HasForeignKey("AlbumId");
                 });
@@ -823,9 +832,13 @@ namespace DjTaba.Migrations
 
             modelBuilder.Entity("DjTaba.Models.MusicToAlbum", b =>
                 {
-                    b.HasOne("DjTaba.Models.Album", null)
+                    b.HasOne("DjTaba.Models.Album", "Album")
                         .WithMany("MusicToAlbums")
                         .HasForeignKey("AlbumId");
+
+                    b.HasOne("DjTaba.Models.Music", "Music")
+                        .WithMany()
+                        .HasForeignKey("MusicId");
                 });
 
             modelBuilder.Entity("DjTaba.Models.PlayList", b =>
@@ -846,6 +859,13 @@ namespace DjTaba.Migrations
                     b.HasOne("DjTaba.Models.PlayList", "PlayList")
                         .WithMany()
                         .HasForeignKey("PlayListId");
+                });
+
+            modelBuilder.Entity("DjTaba.Models.Slider", b =>
+                {
+                    b.HasOne("DjTaba.Models.Music", "Music")
+                        .WithMany()
+                        .HasForeignKey("MusicId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

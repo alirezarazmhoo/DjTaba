@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using DjTaba.Models;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using DjTaba.Models.ViewModel;
 
 namespace DjTaba.Controllers.api
 {
@@ -39,7 +40,7 @@ namespace DjTaba.Controllers.api
         {
             try
             {
-                var Item = await _unitofwork.IPlayListRepo.GetPlaylistByIdAsync(Id);
+                var Item = await _unitofwork.IPlayListRepo.GetPlaylistByIdAsync(Id);              
                 if (Item is null)
                 {
                     return BadRequest($"The Id By {Id} Is Not Found !");

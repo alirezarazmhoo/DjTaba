@@ -74,7 +74,7 @@ namespace DjTaba.Services
 		public async Task<PlayListAndMusic> GetPlaylistByIdAsync(int Id)
 		{
 			PlayListAndMusic playListAndMusic = new PlayListAndMusic();
-			List<Music> musics = new List<Music>();
+			List<MusicChild> musics = new List<MusicChild>();
 			PlayList playList =await _DbContext.PlayLists.Include(s=>s.Genre).Where(s=>s.Id == Id).FirstOrDefaultAsync();
 			if(playList is null)
 			{
@@ -82,7 +82,7 @@ namespace DjTaba.Services
 			}
 			foreach (var item in await _DbContext.PlayListToMusics.Include(s => s.Music).Where(s => s.PlayListId == Id).ToListAsync())
 			{
-				musics.Add(item.Music);
+				musics.Add(new MusicChild() { Id = item.MusicId.Value , Name = item.Music.Name , Url = item.Music.PictureMusicUrlThumbNail });
 			}
 			playListAndMusic.PlayList = playList;
 			playListAndMusic.PlayListToMusics = musics;

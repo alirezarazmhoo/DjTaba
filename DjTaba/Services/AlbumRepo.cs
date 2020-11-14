@@ -19,36 +19,36 @@ namespace DjTaba.Services
 		}
 		public async Task<IEnumerable<Album>> GetAllAlbumsAsync()
 		{
-			return await FindAll(null).Include(s => s.Genre).Include(s=>s.ArtistToAlbums).Include(s=>s.MusicToAlbums)
+			return await FindAll(null).Include(s => s.Genre)
 			  .OrderByDescending(s => s.Id)
 			  .ToListAsync();
 		}
 		public async Task<IEnumerable<Album>> GetAllNewstsAlbumsAsync()
 		{
-			return await FindAll(null).Include(s => s.Genre).Include(s => s.ArtistToAlbums).Include(s => s.MusicToAlbums)
+			return await FindAll(null).Include(s => s.Genre)
 			  .OrderByDescending(s => s.PublishedDate)
 			  .ToListAsync();
 		}
 		public async Task<IEnumerable<Album>> GetAllMostViewedAlbumsAsync()
 		{
-			return await FindAll(null).Include(s => s.Genre).Include(s => s.ArtistToAlbums).Include(s => s.MusicToAlbums).OrderByDescending(s => s.View).Take(10)
+			return await FindAll(null).Include(s => s.Genre).OrderByDescending(s => s.View).Take(10)
 	       .ToListAsync();
 		}
 		public async Task<AlbumAndDetailsViewModel> GetAlbumByIdAsync(int Id)
 		{
 			AlbumAndDetailsViewModel albumAndDetailsViewMode = new AlbumAndDetailsViewModel();
 			Album albumitem = await _DbContext.Albums.Include(s=>s.Genre).Where(s => s.Id == Id).FirstOrDefaultAsync();
-			List<MusicToAlbum> musicToAlbums = await _DbContext.MusicToAlbums.Include(s=>s.Music).Where(s=>s.AlbumId == Id).ToListAsync();
-			List<ArtistToAlbum>  artistToAlbums = await _DbContext.ArtistToAlbums.Include(s => s.Artist).Where(s => s.AlbumId == Id).ToListAsync();
+			List<MusicToAlbum> musicToAlbums = await _DbContext.MusicToAlbums.Where(s=>s.AlbumId == Id).ToListAsync();
+			List<ArtistToAlbum>  artistToAlbums = await _DbContext.ArtistToAlbums.Where(s => s.AlbumId == Id).ToListAsync();
 			List<ImagesToAlbum> imagesToAlbums = await _DbContext.ImagesToAlbums.Where(s => s.AlbumId == Id).ToListAsync();
 			if (albumitem is null)
 			{
 				 throw new Exception();
 			}
 			albumAndDetailsViewMode.Album = albumitem;
-			albumAndDetailsViewMode.Musics = musicToAlbums.ToList();
-			albumAndDetailsViewMode.Artists = artistToAlbums.ToList();
-			albumAndDetailsViewMode.Images = imagesToAlbums.ToList();
+			//albumAndDetailsViewMode.Musics = musicToAlbums.ToList();
+			//albumAndDetailsViewMode.Artists = artistToAlbums.ToList();
+			//albumAndDetailsViewMode.Images = imagesToAlbums.ToList();
 			return albumAndDetailsViewMode;
 		}
 		public async Task AddViewToAlbum(int id, string address)

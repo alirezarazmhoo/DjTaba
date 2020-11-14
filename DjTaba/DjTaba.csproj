@@ -7646,6 +7646,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Upload\Albums\MainImage\" />
+    <Folder Include="wwwroot\Upload\Albums\Files\" />
     <Folder Include="wwwroot\Upload\Albums\ThumbNail\" />
     <Folder Include="wwwroot\Upload\ComingSoon\MainImage\" />
     <Folder Include="wwwroot\Upload\ComingSoon\ThumbNail\" />
@@ -7657,7 +7658,8 @@
     <Folder Include="wwwroot\Upload\PlayList\Cover\MainImage\" />
     <Folder Include="wwwroot\Upload\PlayList\Cover\ThumbNail\" />
     <Folder Include="wwwroot\Upload\PlayList\Files\" />
-    <Folder Include="wwwroot\Upload\Slider\Files\" />
+    <Folder Include="wwwroot\Upload\Slider\File\" />
+    <Folder Include="wwwroot\Upload\Video\File\" />
   </ItemGroup>
 
 </Project>

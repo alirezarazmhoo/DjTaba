@@ -10,6 +10,7 @@ namespace DjTaba.Models
 		public int Id { get; set; }
         public string ImageUrl { get; set; }
 		public int? AlbumId { get; set; }
-		public Album Album { get; set; }
+
+		//public Album Album { get; set; }
 	}
 }
