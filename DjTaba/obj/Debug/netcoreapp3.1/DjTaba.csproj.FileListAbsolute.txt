@@ -447,3 +447,5 @@ C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\runtimes\uni
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\DjTaba.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\DjTaba.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Views\Albums\Index.cshtml.g.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Debug\netcoreapp3.1\Razor\Views\Albums\Create.cshtml.g.cs

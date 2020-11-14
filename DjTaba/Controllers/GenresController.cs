@@ -31,7 +31,7 @@ namespace DjTaba.Controllers
                     : await _unitofwork.IGenreRepo.GetGenreWithDetailsAsync(searchString);
                 return View(PaginatedList<Genre>.CreateAsync(genres.AsQueryable(), pageNumber ?? 1, pageSize));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Content("Some Things Is Wrong !");
             }

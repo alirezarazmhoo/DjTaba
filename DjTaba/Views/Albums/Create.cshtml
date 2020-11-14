@@ -1,0 +1,82 @@
+﻿@model DjTaba.Models.Album
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create",
+                     "MarketerTutorials",
+                     FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box" style="height:auto">
+
+                <div class="text-center text-blue" style="border-style:solid;">
+                    <h2>Add Album</h2>
+                </div>
+
+                <div class="form-horizontal" >
+
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @style="width:50%"} })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Genre, "Genre", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DropDownList("Genre", null, htmlAttributes: new { @class = "form-control" , @style="width:50%" })
+                            </div>
+                        </div>
+                        <div class="form-group " style="margin-left:60px">
+                            <label for="exampleInputEmail1"> SelecAlbumCoverPicutre :</label>
+                            <div id="main-container">
+                                <input display="Album" id="PicutreAlbumUrl" name="PicutreAlbumUrl" class="TheFile" onchange="SetPictures('PicutreAlbumUrl','ImageAlbumUrl');" style="display:none" type="file" required>
+                                <button type="button" style="height:20%;margin-left:15px;top:0;" class="btn btn-primary" onclick="PicutreAlbumUrl.click()"><i class="fa fa-photo"></i> Choose Picture  </button>
+                                <div id="ImageAlbumUrl" style="width:400px;height:auto;margin-left:5px;margin-top:5px">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-left:60px;margin-top:10px">
+                            <label for="exampleInputEmail1"> ChooseOtherPictures :</label>
+                            <div id="main-container">
+                                <input display="AlbumsFiles" id="AlbumsFiles" name="AlbumsFiles" class="AlbumsUrl" onchange="SetPictures('AlbumsFiles','AlbumsFilesItems');" style="display:none" multiple type="file">
+                                <button type="button" style="height:20%;margin-left:15px;top:0;" class="btn btn-primary" onclick="AlbumsFiles.click()"><i class="fa fa-file-audio-o"></i>Choose</button>
+                                <div id="AlbumsFilesItems" style="width:400px;height:auto;margin-left:5px;margin-top:10px">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+          
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+
+<div class="row"  style="margin-left : 10px">
+    <a class="btn btn-warning" href="/Albums/Index"> Return</a>
+    <input type="submit" value="Save" class="btn btn-success" />
+</div>
+
+
+
+<script>
+
+
+
+
+</script>

@@ -1,0 +1,175 @@
+﻿@model DjTaba.Utility.PaginatedList<DjTaba.Models.Album>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="content-header">
+    <h1 style="float:right">
+        AlbumsManager
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Albums</li>
+    </ol>
+</section>
+<p>
+<a id="addnew" class="btn btn-success" href="../Albums/Create" style="margin-right: 10px;margin-top: 30px;"> Add New</a>
+</p>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="text-center" style="border-style: solid;border-color:dimgray">
+            <h2 style="font-size:medium">Search</h2>
+        </div>
+        @using (Html.BeginForm("Index",
+             "Albums",
+             FormMethod.Post))
+        {
+
+            <div class="box zmdi-border-color" style="height:auto">
+                <div class="box-body table-responsive no-padding row ">
+                    <div style="width:90%;margin-right:30px;margin-top:20px;">
+                        <div class="row" style="margin-left:20px;">
+                            <label for="exampleInputEmail1">Search By Title:</label>
+                            <input name="searchString" placeholder="Insert FullName" class="" style="width:260px">
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:20px">
+                    <button style="margin-right:20px;" type="submit" class="btn btn-primary">Search Or Reload</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-body table-responsive no-padding">
+                <table class="table table-hover text-center">
+                    <tr>
+                        <th>
+                            Row
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Genre
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            PhotoCreator
+                        </th>
+                        <th>
+                            PublishedDate
+                        </th>
+                        <th>
+                            Image
+                        </th>
+                        <th>
+                            Views
+                        </th>
+                        <th>
+                            Actions
+                        </th>
+                    </tr>
+                    @{ int rowNo = 0; }
+                    @foreach (var item in Model)
+                    {
+                <tr>
+                    <td>
+                        @(rowNo += 1)
+                    </td>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Genre.Name
+                    </td>
+                    @{
+                        if (string.IsNullOrEmpty(item.Description))
+                        {
+                            <td class="text text-danger">
+                                No Description !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.Description
+                            </td>
+                        }
+
+                    }
+                    @{
+
+                        if (string.IsNullOrEmpty(item.PhotoCreator))
+                        {
+                            <td class="text text-danger">
+                                No PhotoCreator !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.PhotoCreator
+                            </td>
+                        }
+
+                    }
+                    @{
+
+                        if (item.PublishedDate == DateTime.MinValue)
+                        {
+                            <td class="text text-danger">
+                                No Date !
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @item.PublishedDate
+                            </td>
+                        }
+
+                    }
+                    <td>
+                        <img src="../Upload/Albums/ThumbNail/@item.MainImageUrlThumbNail" style="width:50px;height:60px" />
+                    </td>
+                    <td>
+                        @item.View
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#QuestionModal" onclick="AssignButtonClicked(this)" data-assigned-id="@item.Id"> Remove</button> |
+                        <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#EditModal" id="@item.Id"> Edit</button>
+                    </td>
+                </tr>
+                    }
+                </table>
+            </div>
+        </div>
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
+
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex - 1)"
+           class="btn btn-default @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-pageNumber="@(Model.PageIndex + 1)"
+           class="btn btn-default @nextDisabled">
+            Next
+        </a>
+
+    </div>
+</div>
