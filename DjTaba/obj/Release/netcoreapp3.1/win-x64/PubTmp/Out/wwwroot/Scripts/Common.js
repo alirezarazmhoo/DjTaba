@@ -305,3 +305,27 @@ function RemoveFiles(ParentTarget, ActionName,ParameterName, Parametervalue ) {
         }
     });
 }
+function AjaxFillModal(ActionName, Target){
+    $.ajax({
+        type: "GET",
+        url: "" + ActionName + "",
+        dataType: "json",
+        contentType: false,
+        processData: false,
+        success: function (response) {
+            if (response.success) {
+                $.each(response.list, function () {
+                    $('#' + Target + '').append($("<div class='row' style='padding:10px;background-color:aquamarine;width:90%;margin:auto;margin-top:5px'><p>" + this.name + "<input type='checkbox' value='" + this.id + "' style='margin-left:2px'/></p></div>"));
+                });
+            }
+            else {
+                $("#textError").text(response.responseText);
+                $("#ErrorModal").modal('show');
+            }
+        },
+        error: function (response) {
+            alert("Error");
+            //$("#LoadingModal").modal('show');
+        }
+    });
+}

@@ -768,3 +768,5 @@ C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\win-x64\Ra
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\win-x64\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\win-x64\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\win-x64\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\win-x64\Razor\Views\Albums\Create.cshtml.g.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\win-x64\Razor\Views\Albums\Index.cshtml.g.cs

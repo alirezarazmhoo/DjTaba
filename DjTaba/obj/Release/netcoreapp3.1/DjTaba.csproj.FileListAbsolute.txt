@@ -447,3 +447,5 @@ C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\System.Dra
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\bin\Release\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\Razor\Views\Albums\Create.cshtml.g.cs
+C:\Users\Razmjoo\source\repos\DjTaba\DjTaba\obj\Release\netcoreapp3.1\Razor\Views\Albums\Index.cshtml.g.cs

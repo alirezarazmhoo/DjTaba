@@ -19,25 +19,25 @@ namespace DjTaba.Services
 		}
 		public async Task<IEnumerable<Album>> GetAllAlbumsAsync()
 		{
-			return await FindAll(null).Include(s => s.Genre)
+			return await FindAll(null).Include(s => s.GenreToAlbums)
 			  .OrderByDescending(s => s.Id)
 			  .ToListAsync();
 		}
 		public async Task<IEnumerable<Album>> GetAllNewstsAlbumsAsync()
 		{
-			return await FindAll(null).Include(s => s.Genre)
+			return await FindAll(null).Include(s => s.GenreToAlbums)
 			  .OrderByDescending(s => s.PublishedDate)
 			  .ToListAsync();
 		}
 		public async Task<IEnumerable<Album>> GetAllMostViewedAlbumsAsync()
 		{
-			return await FindAll(null).Include(s => s.Genre).OrderByDescending(s => s.View).Take(10)
+			return await FindAll(null).Include(s => s.GenreToAlbums).OrderByDescending(s => s.View).Take(10)
 	       .ToListAsync();
 		}
 		public async Task<AlbumAndDetailsViewModel> GetAlbumByIdAsync(int Id)
 		{
 			AlbumAndDetailsViewModel albumAndDetailsViewMode = new AlbumAndDetailsViewModel();
-			Album albumitem = await _DbContext.Albums.Include(s=>s.Genre).Where(s => s.Id == Id).FirstOrDefaultAsync();
+			Album albumitem = await _DbContext.Albums.Include(s=>s.GenreToAlbums).Where(s => s.Id == Id).FirstOrDefaultAsync();
 			List<MusicToAlbum> musicToAlbums = await _DbContext.MusicToAlbums.Where(s=>s.AlbumId == Id).ToListAsync();
 			List<ArtistToAlbum>  artistToAlbums = await _DbContext.ArtistToAlbums.Where(s => s.AlbumId == Id).ToListAsync();
 			List<ImagesToAlbum> imagesToAlbums = await _DbContext.ImagesToAlbums.Where(s => s.AlbumId == Id).ToListAsync();

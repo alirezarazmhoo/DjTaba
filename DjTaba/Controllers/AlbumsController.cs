@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using DjTaba.Models;
 using DjTaba.Utility;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using DjTaba.Models.ViewModel;
 
 namespace DjTaba.Controllers
 {
@@ -27,16 +28,30 @@ namespace DjTaba.Controllers
             }
             catch (Exception)
             {
-                return Content("Some Things Is Wrong !");
+                return Content("Something is Wrong");
             }
         }
-
-        public async Task<IActionResult>  Create()
+        public IActionResult  Create()
         {
-            ViewBag.Genre = new SelectList(await _unitofwork.IGenreRepo.GetAllGenresAsync(), "Id", "Name");
             return View();
         }
 
+        public async Task<JsonResult> LoadGenres()
+        {
+            List<ComboBoxViewModel> items = new List<ComboBoxViewModel>();
+            try
+            {
+                foreach (var item in await _unitofwork.IGenreRepo.GetAllGenresAsync())
+                {
+                    items.Add(new ComboBoxViewModel() { id = item.Id, name = item.Name });
+                }
+                return Json(new { success = true, list = items.ToList() });
+            }
+            catch (Exception)
+            {
+                return Json(new { response = false, responseText = "Faild To Get Genres Data" });
+            }
+        }
 
 
     }

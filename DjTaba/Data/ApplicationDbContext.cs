@@ -32,6 +32,6 @@ namespace DjTaba.Data
 		public DbSet<Models.ClientToMusic> ClientToMusic { get; set; }
 		public DbSet<Models.ComingSoon>  ComingSoons { get; set; }
 		public DbSet<Models.MyExepction> MyExepctions { get; set; }
-
+		public DbSet<Models.GenreToAlbum> GenreToAlbums { get; set; }
 	}
 }

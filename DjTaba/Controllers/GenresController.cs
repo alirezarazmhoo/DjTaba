@@ -56,7 +56,7 @@ namespace DjTaba.Controllers
                     return Json(new { success = true, responseText = "Operation Completed !" });
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return Json(new { success = false, responseText = "Requset Faild !" });
             }
