@@ -68,6 +68,17 @@ namespace DjTaba.Services
 			}
 		}
 
+		public async Task<IEnumerable<GetByGenreId>> GetAlbumByGenreIdAsync(int GenreId)
+		{
+			List<GetByGenreId> list = new List<GetByGenreId>();
+			var Items = await _DbContext.GenreToAlbums.Where(s => s.GenreId == GenreId).Select(s=>new { s.Album.Name , s.AlbumId , s.Album.MainImageUrlThumbNail}).ToListAsync();
+			foreach (var item in Items)
+			{
+				list.Add(new GetByGenreId() { Id = item.AlbumId, Name = item.Name, Url = item.MainImageUrlThumbNail });
+			}
+			return list;
+		}
+
 
 
 	}

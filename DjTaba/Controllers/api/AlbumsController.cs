@@ -52,7 +52,6 @@ namespace DjTaba.Controllers.api
                 return BadRequest(ex.Message);
             }
         }
-
         [Route("GetNewests")]
         public async Task<ActionResult> GetNewests()
         {
@@ -91,6 +90,25 @@ namespace DjTaba.Controllers.api
                 return BadRequest(ex.Message);
             }
         }
-
+        [Route("GetByGenreId")]
+        public async Task<ActionResult> GetByGenreId(int Id)
+        {
+            try
+            {
+                var Item = await _unitofwork.IAlbumRepo.GetAlbumByGenreIdAsync(Id);
+                if (Item is null)
+                {
+                    return BadRequest($"The Id By {Id} Is Not Found !");
+                }
+                else
+                {
+                    return Ok(Item);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

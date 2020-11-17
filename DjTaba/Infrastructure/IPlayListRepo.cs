@@ -15,5 +15,6 @@ public	interface IPlayListRepo
 		Task<PlayListAndMusic> GetPlaylistByIdAsync(int Id);
 		Task<IEnumerable<PlayListChild>> GetSummaryAllPlayListAsync(int? pageNumber);
 		Task AddViewToPlayList(int id , string address);
+		Task<IEnumerable<GetByGenreId>> GetPlayListByGenreIdAsync(int GenreId); 
 	}
 }

@@ -16,7 +16,7 @@ namespace DjTaba.Controllers.api
     {
         private IUnitOfWorkRepo _unitofwork;
         public GenresController(IUnitOfWorkRepo unitOfWork)
-        {
+        { 
             _unitofwork = unitOfWork;
         }
         [Route("GetAll")]

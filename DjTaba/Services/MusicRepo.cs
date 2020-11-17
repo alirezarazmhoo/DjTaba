@@ -213,10 +213,15 @@ namespace DjTaba.Services
             return await _DbContext.MusicFiles.Where(s => s.Id == FileId).FirstOrDefaultAsync();
 
         }
-        public async Task<IEnumerable<Music>> GetMusicByGenreIdAsync(int GenreId)
+        public async Task<IEnumerable<GetByGenreId>> GetMusicByGenreIdAsync(int GenreId)
         {
-            return await FindByCondition(s =>s.GenreId == GenreId)
-            .ToListAsync();
+            List<GetByGenreId> list = new List<GetByGenreId>();
+            var Items = await _DbContext.Musics.Where(s => s.GenreId == GenreId).Select(s => new { s.Name, s.Id, s.PictureMusicUrlThumbNail }).ToListAsync();
+            foreach (var item in Items)
+            {
+                list.Add(new GetByGenreId() { Id = item.Id, Name = item.Name, Url = item.PictureMusicUrlThumbNail });
+            }
+            return list;
         }
 
 

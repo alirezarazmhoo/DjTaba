@@ -51,6 +51,7 @@ namespace DjTaba.Controllers.api
                 return BadRequest(ex.Message);
             }
         }
+        
         [Route("GetByGenreId")]
         public async Task<ActionResult> GetByGenreId(int Id)
         {

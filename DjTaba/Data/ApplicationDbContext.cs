@@ -11,6 +11,8 @@ namespace DjTaba.Data
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
 		{
+
+
 		}
 		public DbSet<DjTaba.Models.Artist> Artists { get; set; }
 		public DbSet<Models.ArtistImages> ArtistImages { get; set; }
@@ -33,5 +35,13 @@ namespace DjTaba.Data
 		public DbSet<Models.ComingSoon>  ComingSoons { get; set; }
 		public DbSet<Models.MyExepction> MyExepctions { get; set; }
 		public DbSet<Models.GenreToAlbum> GenreToAlbums { get; set; }
+		public DbSet<Models.Pudcast> Pudcasts { get; set; }
+		public DbSet<Models.PudcastToMusic> PudcastToMusics { get; set; }
+		public DbSet<Models.ClientToPudcast> ClientToPudcasts { get; set; }
+		public DbSet<Models.GenreToPudcast> GenreToPudcast { get; set; }
+		public DbSet<Models.GenreToPlaylist> GenreToPlaylists { get; set; }
+		public DbSet<Models.Dj> Djs { get; set; }
+		public DbSet<Models.DjImages> DjImages { get; set; }
+
 	}
 }

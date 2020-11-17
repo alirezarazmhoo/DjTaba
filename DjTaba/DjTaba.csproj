@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Upload\PlayList\Files\**" />
+    <Content Remove="wwwroot\Upload\PlayList\Files\**" />
+    <EmbeddedResource Remove="wwwroot\Upload\PlayList\Files\**" />
+    <None Remove="wwwroot\Upload\PlayList\Files\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\Admin\bower_components\bootstrap-colorpicker\.bower.json" />
     <Content Include="wwwroot\Admin\bower_components\bootstrap-colorpicker\bower.json" />
     <Content Include="wwwroot\Admin\bower_components\bootstrap-colorpicker\dist\css\bootstrap-colorpicker.css" />
@@ -7650,16 +7657,20 @@
     <Folder Include="wwwroot\Upload\Albums\ThumbNail\" />
     <Folder Include="wwwroot\Upload\ComingSoon\MainImage\" />
     <Folder Include="wwwroot\Upload\ComingSoon\ThumbNail\" />
+    <Folder Include="wwwroot\Upload\Dj\MainImage\" />
     <Folder Include="wwwroot\Upload\ImageArtist\" />
     <Folder Include="wwwroot\Upload\Music\Audio\" />
     <Folder Include="wwwroot\Upload\Music\Cover\MainImage\" />
     <Folder Include="wwwroot\Upload\Music\Cover\ThumbNail\" />
     <Folder Include="wwwroot\Upload\Music\Files\" />
+    <Folder Include="wwwroot\Upload\Genre\" />
     <Folder Include="wwwroot\Upload\PlayList\Cover\MainImage\" />
     <Folder Include="wwwroot\Upload\PlayList\Cover\ThumbNail\" />
-    <Folder Include="wwwroot\Upload\PlayList\Files\" />
+    <Folder Include="wwwroot\Upload\Pudcast\MainImage\" />
+    <Folder Include="wwwroot\Upload\Pudcast\ThumbNail\" />
     <Folder Include="wwwroot\Upload\Slider\File\" />
     <Folder Include="wwwroot\Upload\Video\File\" />
+    <Folder Include="wwwroot\Upload\Video\Cover\" />
   </ItemGroup>
 
 </Project>

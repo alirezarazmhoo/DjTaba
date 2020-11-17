@@ -14,5 +14,6 @@ namespace DjTaba.Infrastructure
 		Task<IEnumerable<Album>> GetAllMostViewedAlbumsAsync();
 		Task<AlbumAndDetailsViewModel> GetAlbumByIdAsync(int Id);
 		Task AddViewToAlbum(int id, string address);
+		Task<IEnumerable<GetByGenreId>> GetAlbumByGenreIdAsync(int GenreId);
 	}
 }

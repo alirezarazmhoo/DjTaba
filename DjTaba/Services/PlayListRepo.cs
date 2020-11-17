@@ -20,7 +20,7 @@ namespace DjTaba.Services
 		}
 		public async Task<IEnumerable<PlayList>> GetAllPlayListAsync()
 		{
-			return await FindAll(null).Include(s=>s.Genre)
+			return await FindAll(null).Include(s=>s.GenreToPlaylists)
 			  .OrderByDescending(s => s.Id)
 			  .ToListAsync();
 		}
@@ -75,7 +75,7 @@ namespace DjTaba.Services
 		{
 			PlayListAndMusic playListAndMusic = new PlayListAndMusic();
 			List<MusicChild> musics = new List<MusicChild>();
-			PlayList playList =await _DbContext.PlayLists.Include(s=>s.Genre).Where(s=>s.Id == Id).FirstOrDefaultAsync();
+			PlayList playList =await _DbContext.PlayLists.Include(s=>s.GenreToPlaylists).Where(s=>s.Id == Id).FirstOrDefaultAsync();
 			if(playList is null)
 			{
 				return null;
@@ -103,6 +103,16 @@ namespace DjTaba.Services
 				await _DbContext.SaveChangesAsync();
 				}
 			}
+		}
+		public async Task<IEnumerable<GetByGenreId>> GetPlayListByGenreIdAsync(int GenreId)
+		{
+			List<GetByGenreId> list = new List<GetByGenreId>();
+			var Items = await _DbContext.GenreToPlaylists.Where(s => s.GenreId == GenreId).Select(s => new { s.PlayList.Name, s.Id, s.PlayList.ImageUrlThumbNail }).ToListAsync();
+			foreach (var item in Items)
+			{
+				list.Add(new GetByGenreId() { Id = item.Id, Name = item.Name, Url = item.ImageUrlThumbNail });
+			}
+			return list;
 		}
 	}
 }

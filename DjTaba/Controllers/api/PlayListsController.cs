@@ -93,5 +93,28 @@ namespace DjTaba.Controllers.api
             }
 
         }
+
+        [Route("GetByGenreId")]
+        public async Task<ActionResult> GetByGenreId(int Id)
+        {
+            try
+            {
+                var Item = await _unitofwork.IPlayListRepo.GetPlayListByGenreIdAsync(Id);
+                if (Item is null)
+                {
+                    return BadRequest($"The Id By {Id} Is Not Found !");
+                }
+                else
+                {
+                    return Ok(Item);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
     }
 }

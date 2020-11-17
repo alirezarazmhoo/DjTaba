@@ -52,10 +52,18 @@ namespace DjTaba.Models.ViewModel
 		public PlayList PlayList { get; set; }
 		public IEnumerable<MusicChild>  PlayListToMusics { get; set; }
 	}
+	public class PudcastAndMusic
+	{
+		public Pudcast Pudcast { get; set; }
+		public IEnumerable<MusicChild> PudcastToMusics { get; set; }
+	}
 	public sealed class AlbumChild : ChildBase
 	{
 	}
 	public sealed class PlayListChild : ChildBase
+	{
+	}
+	public sealed class PudcastChild : ChildBase
 	{
 	}
 	public sealed class MusicChild : ChildBase
@@ -67,6 +75,11 @@ namespace DjTaba.Models.ViewModel
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string Url { get; set; }
+
+	}
+	public  class GetByGenreId :ChildBase
+	{
+	
 
 	}
 
