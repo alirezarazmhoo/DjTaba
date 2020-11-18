@@ -53,6 +53,39 @@ namespace DjTaba.Controllers
             }
         }
 
-
+        public async Task<JsonResult> LoadArtists()
+        {
+            List<ComboBoxViewModel> items = new List<ComboBoxViewModel>();
+            try
+            {
+                foreach (var item in await _unitofwork.IArtistRepo.GetAllArtistsAsync())
+                {
+                    items.Add(new ComboBoxViewModel() { id = item.Id, name = item.FullName });
+                }
+                return Json(new { success = true, list = items.ToList() });
+            }
+            catch (Exception)
+            {
+                return Json(new { response = false, responseText = "Faild To Get Genres Data" });
+            }
+        }
+        public async Task<JsonResult> LoadMuscis(int? pageNumber)
+        {
+            List<ComboBoxViewModel> items = new List<ComboBoxViewModel>();
+            var musicitems =await _unitofwork.IMusicRepo.GetAllMusicsAsync(); 
+            var musicitemspagare = PaginatedList<Music>.CreateAsync(musicitems.AsQueryable(), pageNumber ?? 1, 4); 
+            try
+            {
+                foreach (var item in musicitemspagare)
+                {
+                    items.Add(new ComboBoxViewModel() { id = item.Id, name = item.Name });
+                }
+                return Json(new { success = true, list = items.ToList(), pageIndex = musicitemspagare.PageIndex, hasPreviousPage = musicitemspagare.HasPreviousPage, hasNextPage = musicitemspagare.HasNextPage });
+            }
+            catch (Exception)
+            {
+                return Json(new { response = false, responseText = "Faild To Get Genres Data" }) ;
+            }
+        }
     }
 }

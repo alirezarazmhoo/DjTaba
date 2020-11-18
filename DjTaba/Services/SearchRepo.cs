@@ -45,10 +45,10 @@ namespace DjTaba.Services
 				musicChildren.Add(new MusicChild() { Id = item.Id, Name = item.Name, Url = item.Url });
 			}
 			foreach (var item in await _DbContext.Videos.Where(s => s.Name.Contains(txtsearch))
-     	   .Select(s => new { Id = s.Id, Name = s.Name, Url = s.Url }).Skip((pageNumber.Value - 1) *
+     	   .Select(s => new { Id = s.Id, Name = s.Name, Url = s.Url  , s.CoverUrl}).Skip((pageNumber.Value - 1) *
 		   10).Take(10).ToListAsync())
 			{
-				videos.Add(new Video() { Id = item.Id, Name = item.Name, Url = item.Url });
+				videos.Add(new Video() { Id = item.Id, Name = item.Name, Url = item.Url , CoverUrl = item.CoverUrl });
 			}
 			foreach (var item in await _DbContext.Artists.Where(s => s.FullName.Contains(txtsearch))
 		.Select(s => new { Id = s.Id, Name = s.FullName, Url = s.ArtistImages }).Skip((pageNumber.Value - 1) * 10)

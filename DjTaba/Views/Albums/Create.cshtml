@@ -131,28 +131,15 @@
                 <h4 class="modal-title">Select Artists</h4>
             </div>
             <div class="modal-body" style="height:auto">
-                <table id="tableProduct" class="table table-hover text-center">
+                <table id="tableArtist" class="table table-hover text-center">
                     <tr>
                         <th>Row</th>
                         <th>Name </th>
                         <th>Select</th>
 
                     </tr>
-                    <tr>
-                        <td>1</td>
-
-                        <td>Ali</td>
-                        <td><input type="checkbox" /></td>
-
-                    </tr>
-                    <tr>
-                        <td>2</td>
-
-                        <td>Reza</td>
-                        <td><input type="checkbox" /></td>
-
-
-                    </tr>
+        
+                   
                 </table>
             </div>
             <div class="modal-footer">
@@ -170,33 +157,32 @@
                 <h4 class="modal-title">Select Muscis</h4>
             </div>
             <div class="modal-body" style="height:auto">
-                <table id="tableProduct" class="table table-hover text-center">
-                    <tr>
-                        <th>Row</th>
-                        <th>Name </th>
-                        <th>Select</th>
+                <table id="tableMusic" class="table table-hover text-center">
+                
 
-                    </tr>
-                    <tr>
-                        <td>1</td>
+                        <tr>
+                            <th>Row</th>
+                            <th>Name </th>
+                            <th>Select</th>
+                        </tr>
+                    
+               
 
-                        <td>Music1</td>
-                        <td><input type="checkbox" /></td>
-
-                    </tr>
-                    <tr>
-                        <td>2</td>
-
-                        <td>Musci2</td>
-                        <td><input type="checkbox" /></td>
-
-
-                    </tr>
                 </table>
+                <button onclick="sayhello(this.getAttribute('pageNumber'));"  id="MusicPre" pageNumber="" class="btn btn-default">
+
+                    Previous
+                </button>
+                <button onclick="sayhello(this.getAttribute('pageNumber'));" id="MusicNext" pageNumber="" class="btn btn-default">
+
+                    Next
+                </button>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-success">ok</button>
+                <button type="button" class="btn btn-success" onclick="showarray();">Check</button>
+
             </div>
         </div>
     </div>
@@ -212,10 +198,27 @@
         window.onload = Load;
 	function Load() {
 		FillModal();
+
 	}
 
 	function FillModal() {
-		AjaxFillModal("../Albums/LoadGenres","listGenresModalBody");
+		AjaxFillModal("../Albums/LoadGenres","listGenresModalBody", "row");
+		AjaxFillModal("../Albums/LoadArtists", "tableArtist", "table");
+		AjaxFillModal("../Albums/LoadMuscis" ,"tableMusic" , "table");
+	}
+	function sayhello(number) {
+	
+		
+			$("#tableMusic  tr").each(function () {
+				var rownumber = $(this).closest("tr").index();
+				if (rownumber !== 0) {
+               $(this).remove();
+
+				}
+				           
+});
+			AjaxFillModal("../Albums/LoadMuscis" ,"tableMusic" , "table" ,number );
+			//$("#tableMusic").empty();	
 	}
 
 </script>

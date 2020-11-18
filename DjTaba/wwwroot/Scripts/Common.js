@@ -305,22 +305,63 @@ function RemoveFiles(ParentTarget, ActionName,ParameterName, Parametervalue ) {
         }
     });
 }
-function AjaxFillModal(ActionName, Target){
+function AjaxFillModal(ActionName, Target  , mode , page){
     $.ajax({
         type: "GET",
-        url: "" + ActionName + "",
+        url: "" + ActionName + "?pageNumber=" + page + "",
         dataType: "json",
         contentType: false,
         processData: false,
         success: function (response) {
+            if (mode === "row") {
+
             if (response.success) {
                 $.each(response.list, function () {
-                    $('#' + Target + '').append($("<div class='row' style='padding:10px;background-color:aquamarine;width:90%;margin:auto;margin-top:5px'><p>" + this.name + "<input type='checkbox' value='" + this.id + "' style='margin-left:2px'/></p></div>"));
+                    $('#' + Target + '').append($("<div class='row' style='padding:10px;background-color:aquamarine;width:90%;margin:auto;margin-top:5px'><p>" + this.name + "<input type='checkbox' value='" + this.id + "'  style='margin-left:2px'/></p></div>"));
                 });
             }
             else {
                 $("#textError").text(response.responseText);
                 $("#ErrorModal").modal('show');
+            }
+            }
+            if (mode === 'table') {
+                if (response.success) {
+                    var rownnum = 0;
+                 
+                    $.each(response.list, function () {
+                        rownnum += 1;
+                        $('#' + Target + ' tr:last').after('<tr><td>' + rownnum + '</td><td>' + this.name + '</td><td><input type="checkbox" value="' + this.id + '" onchange="addToItems(this)" /></td></tr>');
+                    });
+                    if (response.hasNextPage !== undefined) {
+                        if (response.hasNextPage === true) {
+                           
+                            $("#MusicNext").prop('disabled', false);
+
+                        }
+                        else {
+                            $("#MusicNext").prop('disabled', true);           
+
+                        }         
+                    }
+                    if (response.hasPreviousPage !== undefined) {
+                        if (response.hasPreviousPage === true) {
+                            //$("#MusicPre").addClass("");
+                            $("#MusicPre").prop('disabled', false);
+                        }
+                        else {
+                            $("#MusicPre").prop('disabled', true);           
+                        }
+                    }
+                    if (response.pageIndex !== undefined) {
+                        $("#MusicPre").attr("pageNumber", response.pageIndex -1);
+                        $("#MusicNext").attr("pageNumber", response.pageIndex + 1);
+                    }                    
+                }
+                else {
+                    $("#textError").text(response.responseText);
+                    $("#ErrorModal").modal('show');
+                }
             }
         },
         error: function (response) {
@@ -329,3 +370,24 @@ function AjaxFillModal(ActionName, Target){
         }
     });
 }
+    var array_name = [];  
+function addToItems(obj) {
+    if ($(obj).is(":checked")) {
+        var t = $(obj).attr("value"); 
+        alert(t); 
+    
+    } else {
+        alert("Not checked");
+    }
+    array_name.push(id);   
+
+}
+function showarray() {
+    for (var i = 0; i < array_name.length; i++) {
+
+        alert(array_name[i]);
+    }
+
+}
+
+

@@ -37,7 +37,7 @@ namespace DjTaba.Controllers
                     : await _unitofwork.IMusicRepo.GetMusicWithDetailsAsync(searchString);
                 return View(PaginatedList<Music>.CreateAsync(Musics.AsQueryable(), pageNumber ?? 1, pageSize));
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return Content("Some Things Is Wrong !");
             }
